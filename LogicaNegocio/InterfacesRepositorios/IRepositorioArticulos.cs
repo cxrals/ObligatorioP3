@@ -6,6 +6,6 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace LogicaNegocio.InterfacesRepositorios {
-    public interface IRepositorioArticulo : IRepositorio<Articulo> {
+    public interface IRepositorioArticulos : IRepositorio<Articulo> {
     }
 }
