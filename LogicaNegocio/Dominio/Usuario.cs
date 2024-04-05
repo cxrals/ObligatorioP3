@@ -6,12 +6,13 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace LogicaNegocio.Dominio {
-    public class Cliente : IValidar {
+    public class Usuario : IValidar {
         public int Id { get; set; }
-        public string RazonSocial { get; set; }
-        public int Rut { get; set; } // 12 digitos
-        public string Direccion { get; set; } // calle, numero, ciudad
-        public int DistanciaHastaDeposito { get; set; }
+        public string Email { get; set; } // unico, aplicar formateado
+        public string Nombre { get; set; }
+        public string Apellido { get; set; }
+        public string Contraseña { get; set; } // min 6 char, mayuscula, minuscula, char especial 
+
         public void EsValido() {
             // TODO
         }
