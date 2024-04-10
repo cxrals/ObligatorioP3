@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace LogicaAplicacion.CasosUso {
-    internal class CUAltaArticulo : ICUAlta<Articulo> {
+    public class CUAltaArticulo : ICUAlta<Articulo> {
         public void Alta(Articulo obj) {
             // TODO
         }

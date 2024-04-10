@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace LogicaAplicacion.InterfacesCasosUso {
-    internal interface ICUAlta<T> {
+    public interface ICUAlta<T> {
         void Alta(T obj);
     }
 }
