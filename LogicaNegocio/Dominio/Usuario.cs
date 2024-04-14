@@ -22,6 +22,7 @@ namespace LogicaNegocio.Dominio {
         [MinLength(6)]
         [RegularExpression(@"^(?=.*[A-Z])(?=.*[a-z])(?=.*[.!;]).{6,}$")]
         public string Contraseña { get; set; } // min 6 char, mayuscula, minuscula, char especial (punto, punto y coma, coma, signo de admiración de cierre)
+        public string Tipo { get; set; }
 
         public void EsValido() {
             // TODO

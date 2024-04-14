@@ -7,6 +7,6 @@ using System.Threading.Tasks;
 
 namespace LogicaNegocio.InterfacesRepositorios {
     public interface IRepositorioUsuarios : IRepositorio<Usuario> {
-
+        Usuario BuscarPorEmail(string email);
     }
 }

@@ -10,6 +10,15 @@ namespace LogicaDatos.Repositorios {
     public class ObligatorioContext : DbContext {
         public DbSet<Usuario> Usuarios { get; set; }
 
+        public ObligatorioContext(DbContextOptions options) : base(options) {
+            
+        }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder) {
+            base.OnModelCreating(modelBuilder);
+            modelBuilder.Entity<Usuario>().ToTable("Usuarios");
+        }
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) {
             base.OnConfiguring(optionsBuilder);
             optionsBuilder.UseSqlServer(

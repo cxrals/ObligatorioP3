@@ -11,6 +11,13 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 
 builder.Services.AddScoped<ICUAlta<Articulo>, CUAltaArticulo>();
+builder.Services.AddScoped<ICUAutenticarUsuario, CUAutenticarUsuario>();
+
+builder.Services.AddScoped<IRepositorioUsuarios, RepositorioUsuarios>();
+
+// TODO: cambiar paca
+//string conStr = builder.Configuration.GetConnectionString("Caro-Zenbook");
+//builder.Services.AddDbContext<ObligatorioContext>(options => options.UseSqlServer(conStr));
 
 var app = builder.Build();
 
