@@ -2,6 +2,7 @@
 using LogicaAplicacion.InterfacesCasosUso;
 using LogicaNegocio.Dominio;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Http;
 using Obligatorio.Models;
 
 namespace Obligatorio.Controllers {

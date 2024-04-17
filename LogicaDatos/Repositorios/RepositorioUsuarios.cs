@@ -24,11 +24,23 @@ namespace LogicaDatos.Repositorios {
         }
 
         public void Update(Usuario obj) {
-            //throw new NotImplementedException();
+            obj.EsValido();
+            Contexto.Usuarios.Update(obj);
+            Contexto.SaveChanges();
         }
 
         public Usuario BuscarPorEmail(string email) {
             return Contexto.Usuarios.Where(u => u.Email.ToLower() == email.ToLower()).First();
         }
+
+        //public void Delete(string email) {
+        //    Usuario aBorrar = BuscarPorEmail(email);
+        //    if (aBorrar != null) {
+        //        Contexto.Usuarios.Remove(aBorrar);
+        //        Contexto.SaveChanges();
+        //    } else {
+        //        throw new Exception("El usuario no existe");
+        //    }
+        //}
     }
 }
