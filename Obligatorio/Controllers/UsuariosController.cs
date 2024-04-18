@@ -7,15 +7,20 @@ using Obligatorio.Models;
 
 namespace Obligatorio.Controllers {
     public class UsuariosController : Controller {
+        public ICUAlta<Usuario> CUAlta { get; set; }
         public ICUAutenticarUsuario CUAutenticarUsuario { get; set; }
 
-        public UsuariosController(ICUAutenticarUsuario cuAutenticarUsuario) {
+        public UsuariosController(ICUAutenticarUsuario cuAutenticarUsuario, ICUAlta<Usuario> cuAlta) {
             CUAutenticarUsuario = cuAutenticarUsuario;
+            CUAlta = cuAlta;
         }
         public IActionResult Index() {
             return View();
         }
 
+        //--------------------------------------------------------------------------
+        //---------------------------- INGRESAR ------------------------------------
+        //--------------------------------------------------------------------------
         public IActionResult Ingresar() {
             return View();
         }
@@ -42,6 +47,25 @@ namespace Obligatorio.Controllers {
         public IActionResult CerrarSesion() {
             HttpContext.Session.Clear();
             return RedirectToAction("Index", "Home");
+        }
+
+        //--------------------------------------------------------------------------
+        //----------------------------- CREATE -------------------------------------
+        //--------------------------------------------------------------------------
+        public ActionResult Create() {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult Create(Usuario nuevo) {
+            try {
+                CUAlta.Alta(nuevo);
+                return RedirectToAction(nameof(Index));
+            } catch (Exception e) {
+                ViewBag.ErrorMsg = e.ToString();
+            }
+
+            return View();
         }
     }
 }

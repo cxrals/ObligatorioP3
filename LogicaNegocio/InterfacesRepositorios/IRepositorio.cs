@@ -10,5 +10,6 @@ namespace LogicaNegocio.InterfacesRepositorios {
         void Create(T obj);
         void Delete(int id);
         void Update(T obj);
+        List<T> GetAll();
     }
 }

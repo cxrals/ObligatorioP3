@@ -16,6 +16,10 @@ namespace LogicaDatos.Repositorios {
             //throw new NotImplementedException();
         }
 
+        public List<Cliente> GetAll() {
+            throw new NotImplementedException();
+        }
+
         public void Update(Cliente obj) {
             //throw new NotImplementedException();
         }

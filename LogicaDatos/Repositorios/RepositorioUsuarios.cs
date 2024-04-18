@@ -33,6 +33,10 @@ namespace LogicaDatos.Repositorios {
             return Contexto.Usuarios.Where(u => u.Email.ToLower() == email.ToLower()).First();
         }
 
+        public List<Usuario> GetAll() {
+            return Contexto.Usuarios.ToList();
+        }
+
         //public void Delete(string email) {
         //    Usuario aBorrar = BuscarPorEmail(email);
         //    if (aBorrar != null) {

@@ -16,6 +16,10 @@ namespace LogicaDatos.Repositorios {
             //throw new NotImplementedException();
         }
 
+        public List<Articulo> GetAll() {
+            throw new NotImplementedException();
+        }
+
         public void Update(Articulo obj) {
             //throw new NotImplementedException();
         }
