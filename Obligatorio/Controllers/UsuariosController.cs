@@ -92,7 +92,7 @@ namespace Obligatorio.Controllers {
                 return RedirectToAction("Index", "Usuarios");
             } catch (Exception e) {
                 //TODO: refinar exceptions
-                ViewBag.Mensaje = e.ToString();
+                ViewBag.ErrorMsg = e.ToString();
             }
 
             return View();
@@ -113,7 +113,7 @@ namespace Obligatorio.Controllers {
                 return RedirectToAction("Index", "Usuarios");
             } catch (Exception e) {
                 //TODO: refinar exceptions
-                ViewBag.Mensaje = e.ToString();
+                ViewBag.ErrorMsg = e.ToString();
             }
             return View();
         }
