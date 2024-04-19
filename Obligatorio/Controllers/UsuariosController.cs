@@ -8,14 +8,22 @@ using Obligatorio.Models;
 namespace Obligatorio.Controllers {
     public class UsuariosController : Controller {
         public ICUAlta<Usuario> CUAlta { get; set; }
+        public ICUBaja<Usuario> CUBaja { get; set; }
+        public ICUListado<Usuario> CUListado { get; set; }
+        public ICUModificar<Usuario> CUModificar { get; set; }
         public ICUAutenticarUsuario CUAutenticarUsuario { get; set; }
+        public ICUBuscarPorId<Usuario> CUBuscarPorIdUsuario { get; set; }
 
-        public UsuariosController(ICUAutenticarUsuario cuAutenticarUsuario, ICUAlta<Usuario> cuAlta) {
+        public UsuariosController(ICUAutenticarUsuario cuAutenticarUsuario, ICUAlta<Usuario> cuAlta, ICUListado<Usuario> cuListado, ICUModificar<Usuario> cuModificar, ICUBuscarPorId<Usuario> cuBuscarPorIdUsuario, ICUBaja<Usuario> cuBaja) {
             CUAutenticarUsuario = cuAutenticarUsuario;
             CUAlta = cuAlta;
+            CUListado = cuListado;
+            CUModificar = cuModificar;
+            CUBuscarPorIdUsuario = cuBuscarPorIdUsuario;
+            CUBaja = cuBaja;
         }
         public IActionResult Index() {
-            return View();
+            return View(CUListado.ObtenerListado());
         }
 
         //--------------------------------------------------------------------------
@@ -60,11 +68,53 @@ namespace Obligatorio.Controllers {
         public ActionResult Create(Usuario nuevo) {
             try {
                 CUAlta.Alta(nuevo);
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("Index", "Usuarios");
             } catch (Exception e) {
+                //TODO: refinar exceptions
                 ViewBag.ErrorMsg = e.ToString();
             }
 
+            return View();
+        }
+
+        //--------------------------------------------------------------------------
+        //----------------------------- UPDATE -------------------------------------
+        //--------------------------------------------------------------------------
+        public ActionResult Edit(int id) {
+            Usuario u = CUBuscarPorIdUsuario.BuscarPorId(id);
+            return View(u);
+        }
+
+        [HttpPost]
+        public ActionResult Edit(int id, Usuario u) {
+            try {
+                CUModificar.Modificar(u);
+                return RedirectToAction("Index", "Usuarios");
+            } catch (Exception e) {
+                //TODO: refinar exceptions
+                ViewBag.Mensaje = e.ToString();
+            }
+
+            return View();
+        }
+
+        //--------------------------------------------------------------------------
+        //----------------------------- DELETE -------------------------------------
+        //--------------------------------------------------------------------------
+        public ActionResult Delete(int id) {
+            Usuario u = CUBuscarPorIdUsuario.BuscarPorId(id);
+            return View(u);
+        }
+
+        [HttpPost]
+        public ActionResult Delete(int id, Usuario u) {
+            try {
+                CUBaja.Baja(id);
+                return RedirectToAction("Index", "Usuarios");
+            } catch (Exception e) {
+                //TODO: refinar exceptions
+                ViewBag.Mensaje = e.ToString();
+            }
             return View();
         }
     }

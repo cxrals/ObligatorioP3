@@ -11,5 +11,6 @@ namespace LogicaNegocio.InterfacesRepositorios {
         void Delete(int id);
         void Update(T obj);
         List<T> GetAll();
+        T FindById(int id);
     }
 }

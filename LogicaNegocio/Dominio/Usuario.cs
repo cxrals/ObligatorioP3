@@ -12,6 +12,7 @@ using Microsoft.EntityFrameworkCore;
 namespace LogicaNegocio.Dominio {
     [Index(nameof(Email), IsUnique = true)]
     public class Usuario : IValidar {
+        [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
         [EmailAddress]
         public string Email { get; set; } // unico, aplicar formateado

@@ -20,7 +20,13 @@ namespace LogicaDatos.Repositorios {
         }
 
         public void Delete(int id) {
-            //throw new NotImplementedException();
+            Usuario aBorrar = FindById(id);
+            if (aBorrar != null) {
+                Contexto.Usuarios.Remove(aBorrar);
+                Contexto.SaveChanges();
+            } else {
+                throw new Exception("El usuario no existe");
+            }
         }
 
         public void Update(Usuario obj) {
@@ -37,14 +43,8 @@ namespace LogicaDatos.Repositorios {
             return Contexto.Usuarios.ToList();
         }
 
-        //public void Delete(string email) {
-        //    Usuario aBorrar = BuscarPorEmail(email);
-        //    if (aBorrar != null) {
-        //        Contexto.Usuarios.Remove(aBorrar);
-        //        Contexto.SaveChanges();
-        //    } else {
-        //        throw new Exception("El usuario no existe");
-        //    }
-        //}
+        public Usuario FindById(int id) {
+            return Contexto.Usuarios.Find(id);
+        }
     }
 }

@@ -17,11 +17,14 @@ builder.Services.AddControllersWithViews();
 
 builder.Services.AddScoped<ICUAlta<Articulo>, CUAltaArticulo>();
 builder.Services.AddScoped<ICUAlta<Usuario>, CUAltaUsuario>();
+builder.Services.AddScoped<ICUBaja<Usuario>, CUBajaUsuario>();
+builder.Services.AddScoped<ICUListado<Usuario>, CUListadoUsuarios>();
+builder.Services.AddScoped<ICUModificar<Usuario>, CUModificarUsuario>();
+builder.Services.AddScoped<ICUBuscarPorId<Usuario>, CUBuscarPorIdUsuario>();
 builder.Services.AddScoped<ICUAutenticarUsuario, CUAutenticarUsuario>();
 
 builder.Services.AddScoped<IRepositorioUsuarios, RepositorioUsuarios>();
 
-// TODO: cambiar paca
 string conStr = builder.Configuration.GetConnectionString("Caro-Zenbook");
 builder.Services.AddDbContext<ObligatorioContext>(options => options.UseSqlServer(conStr));
 

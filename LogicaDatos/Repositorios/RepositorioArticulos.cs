@@ -16,6 +16,10 @@ namespace LogicaDatos.Repositorios {
             //throw new NotImplementedException();
         }
 
+        public Articulo FindById(int id) {
+            throw new NotImplementedException();
+        }
+
         public List<Articulo> GetAll() {
             throw new NotImplementedException();
         }

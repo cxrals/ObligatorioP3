@@ -16,6 +16,10 @@ namespace LogicaDatos.Repositorios {
             //throw new NotImplementedException();
         }
 
+        public Cliente FindById(int id) {
+            throw new NotImplementedException();
+        }
+
         public List<Cliente> GetAll() {
             throw new NotImplementedException();
         }
