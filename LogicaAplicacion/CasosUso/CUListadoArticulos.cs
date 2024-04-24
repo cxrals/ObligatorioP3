@@ -8,13 +8,15 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace LogicaAplicacion.CasosUso {
-    public class CUAltaArticulo : ICUAlta<Articulo> {
+    internal class CUListadoArticulos : ICUListado<Articulo> {
         public IRepositorioArticulos Repo { get; set; }
-        public CUAltaArticulo(IRepositorioArticulos repo) {
+
+        public CUListadoArticulos(IRepositorioArticulos repo) {
             Repo = repo;
         }
-        public void Alta(Articulo obj) {
-            Repo.Create(obj);
+
+        public List<Articulo> ObtenerListado() {
+            return Repo.GetAll();
         }
     }
 }
