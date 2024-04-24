@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 namespace LogicaDatos.Repositorios {
     public class ObligatorioContext : DbContext {
         public DbSet<Usuario> Usuarios { get; set; }
+        public DbSet<Cliente> Clientes { get; set; }
 
         public ObligatorioContext(DbContextOptions options) : base(options) {
             

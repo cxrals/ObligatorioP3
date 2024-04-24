@@ -8,6 +8,14 @@ using System.Threading.Tasks;
 
 namespace LogicaDatos.Repositorios {
     public class RepositorioClientes : IRepositorioClientes {
+        public ObligatorioContext Contexto { get; set; }
+        public RepositorioClientes(ObligatorioContext ctx) {
+            Contexto = ctx;
+        }
+        public Cliente BuscarPorRazonSocial(string nombre) {
+            return Contexto.Clientes.Where(c => c.RazonSocial.ToLower() == nombre.ToLower()).SingleOrDefault();
+        }
+
         public void Create(Cliente obj) {
             //throw new NotImplementedException();
         }
