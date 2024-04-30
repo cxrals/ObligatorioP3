@@ -8,15 +8,14 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace LogicaAplicacion.CasosUso {
-    public class CUListadoArticulos : ICUListado<Articulo> {
+    public class CUModificarArticulo : ICUModificar<Articulo> {
         public IRepositorioArticulos Repo { get; set; }
 
-        public CUListadoArticulos(IRepositorioArticulos repo) {
+        public CUModificarArticulo(IRepositorioArticulos repo) {
             Repo = repo;
         }
-
-        public List<Articulo> ObtenerListado() {
-            return Repo.GetAll();
+        public void Modificar(Articulo obj) {
+            Repo.Update(obj);
         }
     }
 }

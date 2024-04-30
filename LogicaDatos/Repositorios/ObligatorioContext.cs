@@ -10,6 +10,7 @@ namespace LogicaDatos.Repositorios {
     public class ObligatorioContext : DbContext {
         public DbSet<Usuario> Usuarios { get; set; }
         public DbSet<Cliente> Clientes { get; set; }
+        public DbSet<Articulo> Articulos { get; set; }
 
         public ObligatorioContext(DbContextOptions options) : base(options) {
             

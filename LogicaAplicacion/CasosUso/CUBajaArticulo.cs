@@ -8,15 +8,13 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace LogicaAplicacion.CasosUso {
-    public class CUListadoArticulos : ICUListado<Articulo> {
+    public class CUBajaArticulo : ICUBaja<Articulo> {
         public IRepositorioArticulos Repo { get; set; }
-
-        public CUListadoArticulos(IRepositorioArticulos repo) {
+        public CUBajaArticulo(IRepositorioArticulos repo) {
             Repo = repo;
         }
-
-        public List<Articulo> ObtenerListado() {
-            return Repo.GetAll();
+        public void Baja(int id) {
+            Repo.Delete(id);
         }
     }
 }

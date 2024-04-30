@@ -1,4 +1,5 @@
 ﻿using LogicaNegocio.Dominio;
+using LogicaNegocio.Excepciones;
 using LogicaNegocio.InterfacesRepositorios;
 using System;
 using System.Collections.Generic;
@@ -8,24 +9,39 @@ using System.Threading.Tasks;
 
 namespace LogicaDatos.Repositorios {
     internal class RepositorioArticulos : IRepositorioArticulos {
+        public ObligatorioContext Contexto { get; set; }
+
+        public RepositorioArticulos(ObligatorioContext ctx) {
+            Contexto = ctx;
+        }
         public void Create(Articulo obj) {
-            //throw new NotImplementedException();
+            obj.EsValido();
+            Contexto.Articulos.Add(obj);
+            Contexto.SaveChanges();
         }
 
         public void Delete(int id) {
-            //throw new NotImplementedException();
+            Articulo aBorrar = FindById(id);
+            if (aBorrar != null) {
+                Contexto.Articulos.Remove(aBorrar);
+                Contexto.SaveChanges();
+            } else {
+                throw new RegistroNoExisteException("El articulo no existe");
+            }
         }
 
         public Articulo FindById(int id) {
-            throw new NotImplementedException();
+            return Contexto.Articulos.Find(id);
         }
 
         public List<Articulo> GetAll() {
-            throw new NotImplementedException();
+            return Contexto.Articulos.ToList();
         }
 
         public void Update(Articulo obj) {
-            //throw new NotImplementedException();
+            obj.EsValido();
+            Contexto.Articulos.Update(obj);
+            Contexto.SaveChanges();
         }
     }
 }

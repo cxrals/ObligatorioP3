@@ -8,15 +8,13 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace LogicaAplicacion.CasosUso {
-    public class CUListadoArticulos : ICUListado<Articulo> {
+    public class CUBuscarPorIdArticulo : ICUBuscarPorId<Articulo> {
         public IRepositorioArticulos Repo { get; set; }
-
-        public CUListadoArticulos(IRepositorioArticulos repo) {
+        public CUBuscarPorIdArticulo(IRepositorioArticulos repo) {
             Repo = repo;
         }
-
-        public List<Articulo> ObtenerListado() {
-            return Repo.GetAll();
+        public Articulo BuscarPorId(int id) {
+            return Repo.FindById(id);
         }
     }
 }

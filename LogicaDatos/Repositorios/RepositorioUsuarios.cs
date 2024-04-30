@@ -1,4 +1,5 @@
 ﻿using LogicaNegocio.Dominio;
+using LogicaNegocio.Excepciones;
 using LogicaNegocio.InterfacesRepositorios;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -25,7 +26,7 @@ namespace LogicaDatos.Repositorios {
                 Contexto.Usuarios.Remove(aBorrar);
                 Contexto.SaveChanges();
             } else {
-                throw new Exception("El usuario no existe");
+                throw new RegistroNoExisteException("El usuario no existe");
             }
         }
 
