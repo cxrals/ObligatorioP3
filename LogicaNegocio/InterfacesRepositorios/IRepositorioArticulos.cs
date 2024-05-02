@@ -7,5 +7,6 @@ using System.Threading.Tasks;
 
 namespace LogicaNegocio.InterfacesRepositorios {
     public interface IRepositorioArticulos : IRepositorio<Articulo> {
+        List<Articulo> OrdenarArticulosAsc();
     }
 }

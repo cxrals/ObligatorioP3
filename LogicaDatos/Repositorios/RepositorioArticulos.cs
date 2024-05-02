@@ -48,5 +48,9 @@ namespace LogicaDatos.Repositorios {
             Contexto.Articulos.Update(obj);
             Contexto.SaveChanges();
         }
+         
+        public List<Articulo> OrdenarArticulosAsc() {
+            return Contexto.Articulos.OrderBy(a => a.Nombre).ToList();
+        }
     }
 }
