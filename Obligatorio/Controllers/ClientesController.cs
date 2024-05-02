@@ -17,12 +17,12 @@ namespace Obligatorio.Controllers {
             return View(CUListado.ObtenerListado());
         }
 
-        public ActionResult BuscarPorRazonSocial() {
+        public ActionResult BuscarClientes() {
             return View(CUListado.ObtenerListado());
         }
 
         [HttpPost]
-        public ActionResult BuscarPorRazonSocial(string razonSocial) {
+        public ActionResult BuscarClientes(string razonSocial) {
             List<Cliente> clientes = CUBuscarPorRazonSocial.BuscarPorRazonSocial(razonSocial);
             if (clientes.Count == 0) ViewBag.ErrorMsg = "No existen registros";
             return View(clientes);

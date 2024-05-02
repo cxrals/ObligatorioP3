@@ -16,6 +16,7 @@ namespace LogicaDatos.Repositorios {
         }
         public void Create(Usuario obj) {
             obj.EsValido(); 
+            // TODO: chequear duplicates
             Contexto.Usuarios.Add(obj);
             Contexto.SaveChanges();
         }

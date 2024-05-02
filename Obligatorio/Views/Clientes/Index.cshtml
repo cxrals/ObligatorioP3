@@ -8,21 +8,8 @@
     <h1 class="display-4">@ViewData["Title"]</h1>
 </div>
 
-
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="BuscarPorRazonSocial">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-
-            <div class="form-group">
-                <label class="control-label">Razon Social:</label>
-                <input type="text" name="razonSocial" class="form-control" />
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Buscar" class="btn btn-primary mt-2" />
-            </div>
-        </form>
-    </div>
+<div>
+    <a asp-action="BuscarClientes">Buscar Por Razon Social</a>
 </div>
 <span>@ViewBag.ErrorMsg</span>
 

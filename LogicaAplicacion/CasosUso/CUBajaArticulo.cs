@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace LogicaAplicacion.CasosUso {
-    public class CUBajaArticulo : ICUBaja {
+    public class CUBajaArticulo : ICUBaja<Articulo> {
         public IRepositorioArticulos Repo { get; set; }
         public CUBajaArticulo(IRepositorioArticulos repo) {
             Repo = repo;

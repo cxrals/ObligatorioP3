@@ -45,12 +45,8 @@ namespace LogicaDatos.Repositorios {
 
         public void Update(Articulo obj) {
             obj.EsValido();
-            if (!Contexto.Articulos.Any(a => a.Nombre == obj.Nombre) && !Contexto.Articulos.Any(a => a.CodigoProveedor == obj.CodigoProveedor)) {
-                Contexto.Articulos.Update(obj);
-                Contexto.SaveChanges();
-            } else {
-                throw new DuplicadoException("Ya existe un artículo con ese nombre y código de proveedor.");
-            }
+            Contexto.Articulos.Update(obj);
+            Contexto.SaveChanges();
         }
     }
 }

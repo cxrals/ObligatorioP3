@@ -6,12 +6,12 @@ using Microsoft.AspNetCore.Mvc;
 namespace Obligatorio.Controllers {
     public class ArticulosController : Controller {
         public ICUAlta<Articulo> CUAlta { get; set; }
-        public ICUBaja CUBaja { get; set; }
+        public ICUBaja<Articulo> CUBaja { get; set; }
         public ICUListado<Articulo> CUListado { get; set; }
         public ICUModificar<Articulo> CUModificar { get; set; }
         public ICUBuscarPorId<Articulo> CUBuscarPorIdArticulo { get; set; }
 
-        public ArticulosController(ICUAlta<Articulo> cuAlta, ICUListado<Articulo> cuListado, ICUBuscarPorId<Articulo> cuBuscarPorIdArticulo, ICUModificar<Articulo> cuModificar, ICUBaja cuBaja) {
+        public ArticulosController(ICUAlta<Articulo> cuAlta, ICUListado<Articulo> cuListado, ICUBuscarPorId<Articulo> cuBuscarPorIdArticulo, ICUModificar<Articulo> cuModificar, ICUBaja<Articulo> cuBaja) {
             CUAlta = cuAlta;
             CUBaja = cuBaja;
             CUListado = cuListado;
