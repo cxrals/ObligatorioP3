@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using LogicaAplicacion.InterfacesCasosUso;
 using LogicaNegocio.Dominio;
-using Microsoft.AspNetCore.Mvc;
 
 namespace Obligatorio.Controllers {
     public class ClientesController : Controller {
@@ -16,6 +15,17 @@ namespace Obligatorio.Controllers {
 
         public IActionResult Index() {
             return View(CUListado.ObtenerListado());
+        }
+
+        public ActionResult BuscarPorRazonSocial() {
+            return View(CUListado.ObtenerListado());
+        }
+
+        [HttpPost]
+        public ActionResult BuscarPorRazonSocial(string razonSocial) {
+            List<Cliente> clientes = CUBuscarPorRazonSocial.BuscarPorRazonSocial(razonSocial);
+            if (clientes.Count == 0) ViewBag.ErrorMsg = "No existen registros";
+            return View(clientes);
         }
     }
 }

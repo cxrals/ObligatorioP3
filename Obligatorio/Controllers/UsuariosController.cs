@@ -8,13 +8,13 @@ using Obligatorio.Models;
 namespace Obligatorio.Controllers {
     public class UsuariosController : Controller {
         public ICUAlta<Usuario> CUAlta { get; set; }
-        public ICUBaja<Usuario> CUBaja { get; set; }
+        public ICUBaja CUBaja { get; set; }
         public ICUListado<Usuario> CUListado { get; set; }
         public ICUModificar<Usuario> CUModificar { get; set; }
         public ICUAutenticarUsuario CUAutenticarUsuario { get; set; }
         public ICUBuscarPorId<Usuario> CUBuscarPorIdUsuario { get; set; }
 
-        public UsuariosController(ICUAutenticarUsuario cuAutenticarUsuario, ICUAlta<Usuario> cuAlta, ICUListado<Usuario> cuListado, ICUModificar<Usuario> cuModificar, ICUBuscarPorId<Usuario> cuBuscarPorIdUsuario, ICUBaja<Usuario> cuBaja) {
+        public UsuariosController(ICUAutenticarUsuario cuAutenticarUsuario, ICUAlta<Usuario> cuAlta, ICUListado<Usuario> cuListado, ICUModificar<Usuario> cuModificar, ICUBuscarPorId<Usuario> cuBuscarPorIdUsuario, ICUBaja cuBaja) {
             CUAutenticarUsuario = cuAutenticarUsuario;
             CUAlta = cuAlta;
             CUListado = cuListado;

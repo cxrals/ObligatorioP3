@@ -7,6 +7,6 @@ using System.Threading.Tasks;
 
 namespace LogicaAplicacion.InterfacesCasosUso {
     public interface ICUBuscarPorRazonSocial {
-        Cliente BuscarPorRazonSocial(string nombre);
+        List<Cliente> BuscarPorRazonSocial(string nombre);
     }
 }

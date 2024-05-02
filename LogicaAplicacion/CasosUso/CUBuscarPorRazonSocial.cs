@@ -13,7 +13,7 @@ namespace LogicaAplicacion.CasosUso {
         public CUBuscarPorRazonSocial(IRepositorioClientes repo) {
             Repo = repo;
         }
-        public Cliente BuscarPorRazonSocial(string nombre) {
+        public List<Cliente> BuscarPorRazonSocial(string nombre) {
             return Repo.BuscarPorRazonSocial(nombre);
         }
     }

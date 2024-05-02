@@ -7,6 +7,6 @@ using System.Threading.Tasks;
 
 namespace LogicaNegocio.InterfacesRepositorios {
     public interface IRepositorioClientes : IRepositorio<Cliente> {
-        Cliente BuscarPorRazonSocial(string nombre);
+        List<Cliente> BuscarPorRazonSocial(string nombre);
     }
 }

@@ -16,10 +16,13 @@ builder.Services.AddSession(options => {
 builder.Services.AddControllersWithViews();
 
 builder.Services.AddScoped<ICUAlta<Articulo>, CUAltaArticulo>();
+builder.Services.AddScoped<ICUBaja, CUBajaArticulo>();
 builder.Services.AddScoped<ICUListado<Articulo>, CUListadoArticulos>();
+builder.Services.AddScoped<ICUModificar<Articulo>, CUModificarArticulo>();
+builder.Services.AddScoped<ICUBuscarPorId<Articulo>, CUBuscarPorIdArticulo>();
 
 builder.Services.AddScoped<ICUAlta<Usuario>, CUAltaUsuario>();
-builder.Services.AddScoped<ICUBaja<Usuario>, CUBajaUsuario>();
+builder.Services.AddScoped<ICUBaja, CUBajaUsuario>();
 builder.Services.AddScoped<ICUListado<Usuario>, CUListadoUsuarios>();
 builder.Services.AddScoped<ICUModificar<Usuario>, CUModificarUsuario>();
 builder.Services.AddScoped<ICUBuscarPorId<Usuario>, CUBuscarPorIdUsuario>();
@@ -30,6 +33,7 @@ builder.Services.AddScoped<ICUBuscarPorRazonSocial, CUBuscarPorRazonSocial>();
 
 builder.Services.AddScoped<IRepositorioUsuarios, RepositorioUsuarios>();
 builder.Services.AddScoped<IRepositorioClientes, RepositorioClientes>();
+builder.Services.AddScoped<IRepositorioArticulos, RepositorioArticulos>();
 
 string conStr = builder.Configuration.GetConnectionString("Caro-Zenbook");
 builder.Services.AddDbContext<ObligatorioContext>(options => options.UseSqlServer(conStr));

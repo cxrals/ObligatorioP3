@@ -1,10 +1,12 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace LogicaNegocio.ValueObjects {
+    //[Owned]
     public class Calle {
         public string Valor { get; init; }
         private Calle() {

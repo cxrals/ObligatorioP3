@@ -1,4 +1,5 @@
 ﻿using LogicaNegocio.Dominio;
+using LogicaNegocio.Excepciones;
 using LogicaNegocio.InterfacesRepositorios;
 using System;
 using System.Collections.Generic;
@@ -12,28 +13,38 @@ namespace LogicaDatos.Repositorios {
         public RepositorioClientes(ObligatorioContext ctx) {
             Contexto = ctx;
         }
-        public Cliente BuscarPorRazonSocial(string nombre) {
-            return Contexto.Clientes.Where(c => c.RazonSocial.ToLower() == nombre.ToLower()).SingleOrDefault();
+        public List<Cliente> BuscarPorRazonSocial(string nombre) {
+            return Contexto.Clientes.Where(c => c.RazonSocial.Contains(nombre)).ToList();
         }
 
         public void Create(Cliente obj) {
-            //throw new NotImplementedException();
+            obj.EsValido();
+            Contexto.Clientes.Add(obj);
+            Contexto.SaveChanges();
         }
 
         public void Delete(int id) {
-            //throw new NotImplementedException();
+            Cliente aBorrar = FindById(id);
+            if (aBorrar != null) {
+                Contexto.Clientes.Remove(aBorrar);
+                Contexto.SaveChanges();
+            } else {
+                throw new RegistroNoExisteException("El cliente no existe");
+            }
         }
 
         public Cliente FindById(int id) {
-            throw new NotImplementedException();
+            return Contexto.Clientes.Find(id);
         }
 
         public List<Cliente> GetAll() {
-            throw new NotImplementedException();
+            return Contexto.Clientes.ToList();
         }
 
         public void Update(Cliente obj) {
-            //throw new NotImplementedException();
+            obj.EsValido();
+            Contexto.Clientes.Update(obj);
+            Contexto.SaveChanges();
         }
     }
 }

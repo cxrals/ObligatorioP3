@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace LogicaAplicacion.InterfacesCasosUso {
-    public interface ICUBaja<T> {
+    public interface ICUBaja {
         void Baja(int id);
     }
 }

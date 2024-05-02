@@ -19,8 +19,6 @@ namespace LogicaNegocio.ValueObjects {
         private void Validar() {
             if (string.IsNullOrEmpty(Valor))
                 throw new Exception("El numero de puerta es obligatorio");
-            if (!int.TryParse(Valor, out _))
-                throw new Exception("El numero de puerta es obligatorio");
         }
     }
 }
