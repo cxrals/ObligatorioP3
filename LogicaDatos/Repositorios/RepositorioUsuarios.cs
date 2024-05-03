@@ -15,10 +15,13 @@ namespace LogicaDatos.Repositorios {
             Contexto = ctx;
         }
         public void Create(Usuario obj) {
-            obj.EsValido(); 
-            // TODO: chequear duplicates
-            Contexto.Usuarios.Add(obj);
-            Contexto.SaveChanges();
+            obj.EsValido();
+            if (!Contexto.Usuarios.Any(u => u.Email.ToLower() == obj.Email.ToLower())) {
+                Contexto.Usuarios.Add(obj);
+                Contexto.SaveChanges();
+            } else {
+                throw new DuplicadoException("Ya existe un usuario registrado con ese email.");
+            }
         }
 
         public void Delete(int id) {
