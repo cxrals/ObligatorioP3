@@ -11,6 +11,8 @@ namespace LogicaDatos.Repositorios {
         public DbSet<Usuario> Usuarios { get; set; }
         public DbSet<Cliente> Clientes { get; set; }
         public DbSet<Articulo> Articulos { get; set; }
+        public DbSet<Pedido> Pedidos { get; set; }
+        public DbSet<Linea> Lineas { get; set; }
 
         public ObligatorioContext(DbContextOptions options) : base(options) {
             
@@ -21,6 +23,8 @@ namespace LogicaDatos.Repositorios {
             modelBuilder.Entity<Usuario>().ToTable("Usuarios");
             modelBuilder.Entity<Articulo>().ToTable("Articulos");
             modelBuilder.Entity<Cliente>().ToTable("Clientes");
+            modelBuilder.Entity<Pedido>().ToTable("Pedidos");
+            modelBuilder.Entity<Linea>().ToTable("Lineas");
             modelBuilder.Entity<Cliente>().OwnsOne(
                 c => c.Direccion, d => { 
                     d.OwnsOne(c => c.Calle);
