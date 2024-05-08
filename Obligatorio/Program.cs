@@ -1,3 +1,4 @@
+using DataTransferObjects;
 using LogicaAplicacion.CasosUso;
 using LogicaAplicacion.InterfacesCasosUso;
 using LogicaDatos.Repositorios;
@@ -31,9 +32,13 @@ builder.Services.AddScoped<ICUAutenticarUsuario, CUAutenticarUsuario>();
 builder.Services.AddScoped<ICUListado<Cliente>, CUListadoClientes>();
 builder.Services.AddScoped<ICUBuscarPorRazonSocial, CUBuscarPorRazonSocial>();
 
+builder.Services.AddScoped<ICUAlta<PedidoDTO>, CUAltaPedido>();
+
 builder.Services.AddScoped<IRepositorioUsuarios, RepositorioUsuarios>();
 builder.Services.AddScoped<IRepositorioClientes, RepositorioClientes>();
 builder.Services.AddScoped<IRepositorioArticulos, RepositorioArticulos>();
+builder.Services.AddScoped<IRepositorioPedidos, RepositorioPedidos>();
+builder.Services.AddScoped<IRepositorioLineas, RepositorioLineas>();
 
 string conStr = builder.Configuration.GetConnectionString("Caro-Zenbook");
 builder.Services.AddDbContext<ObligatorioContext>(options => options.UseSqlServer(conStr));

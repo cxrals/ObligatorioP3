@@ -13,6 +13,7 @@ namespace LogicaNegocio.Dominio {
 
         public int Id { get; set; }
         public DateOnly Fecha { get { return _fecha; } set { _fecha = value; } }
+        public DateOnly FechaEntrega { get; set; }
         public Cliente Cliente { get; set; }
         public List<Linea> Lineas { get; set; }
         public int Iva { get { return _iva; } set { _iva = value; } }

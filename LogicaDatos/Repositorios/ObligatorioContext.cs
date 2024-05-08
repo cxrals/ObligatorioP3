@@ -12,6 +12,8 @@ namespace LogicaDatos.Repositorios {
         public DbSet<Cliente> Clientes { get; set; }
         public DbSet<Articulo> Articulos { get; set; }
         public DbSet<Pedido> Pedidos { get; set; }
+        public DbSet<PedidoExpress> PedidoExpress { get; set; }
+        public DbSet<PedidoComun> PedidoComun { get; set; }
         public DbSet<Linea> Lineas { get; set; }
 
         public ObligatorioContext(DbContextOptions options) : base(options) {

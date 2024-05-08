@@ -9,7 +9,6 @@ using System.Threading.Tasks;
 namespace LogicaNegocio.Dominio {
     public class PedidoComun : Pedido, IValidar {
         public int Recargo { get; set; } // si Cliente.DistanciaHastaDeposito > 100 ? 5% : 0
-        public DateOnly FechaEntrega { get; set; }
         public int PlazoEstipulado { get; set; } // > 7 dias
 
         public void EsValido() {
