@@ -93,13 +93,13 @@ namespace Obligatorio.Controllers {
         //----------------------------- BUSCAR -------------------------------------
         //--------------------------------------------------------------------------
         public ActionResult BuscarPedidos() {
-            return View(CUListado.ObtenerListado());
+            return View();
         }
 
         [HttpPost]
         public ActionResult BuscarPedidos(string fecha) {
             DateOnly fechaABuscar = DateOnly.Parse(fecha);
-            List<Pedido> pedidos = CUBuscarPorFechaPedido.BuscarPorFechaPedido(fechaABuscar);
+            List<PedidoNoEntregadoDTO> pedidos = CUBuscarPorFechaPedido.BuscarPorFechaPedido(fechaABuscar);
             if (pedidos.Count == 0) ViewBag.ErrorMsg = "No existen registros";
             return View(pedidos);
         }

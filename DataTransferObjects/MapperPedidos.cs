@@ -24,6 +24,7 @@ namespace DataTransferObjects {
 
         public static List<PedidoNoEntregadoDTO> ToListDto(List<Pedido> pedidos) {
             return pedidos.Select(p => new PedidoNoEntregadoDTO() {
+                Id = p.Id,
                 FechaEntrega = p.FechaEntrega,
                 RazonSocialCliente = p.Cliente.RazonSocial,
                 Total = p.Iva

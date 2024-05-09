@@ -1,4 +1,5 @@
-﻿using LogicaAplicacion.InterfacesCasosUso;
+﻿using DataTransferObjects;
+using LogicaAplicacion.InterfacesCasosUso;
 using LogicaNegocio.Dominio;
 using LogicaNegocio.InterfacesRepositorios;
 using System;
@@ -14,8 +15,13 @@ namespace LogicaAplicacion.CasosUso {
         public CUBuscarPorFechaPedido(IRepositorioPedidos repo) {
             Repo = repo;
         }
-        public List<Pedido> BuscarPorFechaPedido(DateOnly fecha) {
-            return Repo.BuscarPorFechaDeEmision(fecha);
+        public List<PedidoNoEntregadoDTO> BuscarPorFechaPedido(DateOnly fecha) {
+            List<PedidoNoEntregadoDTO> dtos = new List<PedidoNoEntregadoDTO>();
+            List<Pedido> pedidosEncontrados = Repo.BuscarPorFechaDeEmision(fecha);
+            if (pedidosEncontrados.Count > 0) {
+                dtos = MapperPedidos.ToListDto(pedidosEncontrados);
+            }
+            return dtos;
         }
     }
 }
