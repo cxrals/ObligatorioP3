@@ -9,6 +9,6 @@ namespace LogicaNegocio.InterfacesRepositorios {
     public interface IRepositorioPedidos : IRepositorio<Pedido>{
         void AnularPedido(int id); 
         List<Pedido> BuscarPorFechaDeEmision(DateOnly fecha);
-        List<Pedido> ObtenerPedidosAnulados();
+        List<Pedido> OrdenarPedidosAnuladosPorFechaDesc();
     }
 }

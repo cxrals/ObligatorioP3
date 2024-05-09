@@ -16,6 +16,7 @@ namespace LogicaAplicacion.CasosUso {
             Repo = repo;
         }
 
+        // Listado con todos los artículos ordenados alfabéticamente en forma ascendente
         public List<ArticuloDTO> OrdenarPorNombreAsc() {
             List<ArticuloDTO> dtos = new List<ArticuloDTO>();
             List<Articulo> articulosOrdenados = Repo.OrdenarArticulosAsc();

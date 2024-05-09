@@ -48,7 +48,8 @@ namespace LogicaDatos.Repositorios {
             Contexto.Articulos.Update(obj);
             Contexto.SaveChanges();
         }
-         
+
+        // Listado con todos los artículos ordenados alfabéticamente en forma ascendente
         public List<Articulo> OrdenarArticulosAsc() {
             return Contexto.Articulos.OrderBy(a => a.Nombre).ToList();
         }

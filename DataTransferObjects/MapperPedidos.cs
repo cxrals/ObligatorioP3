@@ -21,5 +21,14 @@ namespace DataTransferObjects {
 
             return p;
         }
+
+        public static List<PedidoNoEntregadoDTO> ToListDto(List<Pedido> pedidos) {
+            return pedidos.Select(p => new PedidoNoEntregadoDTO() {
+                FechaEntrega = p.FechaEntrega,
+                RazonSocialCliente = p.Cliente.RazonSocial,
+                Total = p.Iva
+            })
+            .ToList();
+        }
     }
 }

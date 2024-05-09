@@ -51,11 +51,11 @@ namespace LogicaDatos.Repositorios {
         }
 
         public List<Pedido> BuscarPorFechaDeEmision(DateOnly fecha) {
-            return Contexto.Pedidos.Where(p => p.Fecha == fecha).ToList();
+            return Contexto.Pedidos.Where(p => p.Fecha == fecha && p.Estado == "Pendiente").Include(p => p.Cliente).ToList();
         }
 
-        public List<Pedido> ObtenerPedidosAnulados() {
-            throw new NotImplementedException();
+        public List<Pedido> OrdenarPedidosAnuladosPorFechaDesc() {
+            return Contexto.Pedidos.Where(p => p.Estado == "Anulado").Include(p => p.Cliente).OrderByDescending(p => p.Fecha).ToList();
         }
     }
 }

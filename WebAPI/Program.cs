@@ -12,8 +12,10 @@ namespace WebAPI {
 
             // Add services to the container.
             builder.Services.AddScoped<ICUOrdenarArticulosAsc, CUOrdenarArticulosAsc>();
+            builder.Services.AddScoped<ICUOrdenarPedidosAnuladosDesc, CUOrdenarPedidosAnuladosDesc>();
 
             builder.Services.AddScoped<IRepositorioArticulos, RepositorioArticulos>();
+            builder.Services.AddScoped<IRepositorioPedidos, RepositorioPedidos>();
 
             string conStr = builder.Configuration.GetConnectionString("Caro-Zenbook");
             builder.Services.AddDbContext<ObligatorioContext>(options => options.UseSqlServer(conStr));
