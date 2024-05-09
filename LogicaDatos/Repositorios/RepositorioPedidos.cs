@@ -1,4 +1,5 @@
 ﻿using LogicaNegocio.Dominio;
+using LogicaNegocio.Excepciones;
 using LogicaNegocio.InterfacesRepositorios;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -6,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace LogicaDatos.Repositorios {
     public class RepositorioPedidos : IRepositorioPedidos {
@@ -26,15 +28,34 @@ namespace LogicaDatos.Repositorios {
         }
 
         public Pedido FindById(int id) {
-            throw new NotImplementedException();
+            return Contexto.Pedidos.Find(id);
         }
 
         public List<Pedido> GetAll() {
-            throw new NotImplementedException();
+            return Contexto.Pedidos.ToList();
         }
 
         public void Update(Pedido obj) {
             //throw new NotImplementedException();
+        }
+
+        public void AnularPedido(int id) {
+            Pedido aAnular = FindById(id);
+            if (aAnular != null) {
+                aAnular.Estado = "Anulado";
+                Contexto.Pedidos.Update(aAnular);
+                Contexto.SaveChanges();
+            } else {
+                throw new RegistroNoExisteException("El pedido no existe");
+            }
+        }
+
+        public List<Pedido> BuscarPorFechaDeEmision(DateOnly fecha) {
+            return Contexto.Pedidos.Where(p => p.Fecha == fecha).ToList();
+        }
+
+        public List<Pedido> ObtenerPedidosAnulados() {
+            throw new NotImplementedException();
         }
     }
 }

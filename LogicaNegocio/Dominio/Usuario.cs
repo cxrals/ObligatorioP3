@@ -38,5 +38,7 @@ namespace LogicaNegocio.Dominio {
 
             return hasNumber.IsMatch(contraseña) && hasUpperChar.IsMatch(contraseña);
         }
+
+        // TODO encriptado de password
     }
 }

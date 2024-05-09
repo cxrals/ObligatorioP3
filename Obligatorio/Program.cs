@@ -33,6 +33,10 @@ builder.Services.AddScoped<ICUListado<Cliente>, CUListadoClientes>();
 builder.Services.AddScoped<ICUBuscarPorRazonSocial, CUBuscarPorRazonSocial>();
 
 builder.Services.AddScoped<ICUAlta<PedidoDTO>, CUAltaPedido>();
+builder.Services.AddScoped<ICUBuscarPorFechaPedido, CUBuscarPorFechaPedido>();
+builder.Services.AddScoped<ICUAnularPedido, CUAnularPedido>();
+builder.Services.AddScoped<ICUBuscarPorId<Pedido>, CUBuscarPorIdPedido>();
+builder.Services.AddScoped<ICUListado<Pedido>, CUListadoPedidos>();
 
 builder.Services.AddScoped<IRepositorioUsuarios, RepositorioUsuarios>();
 builder.Services.AddScoped<IRepositorioClientes, RepositorioClientes>();
