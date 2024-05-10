@@ -12,21 +12,22 @@ namespace Obligatorio.Controllers {
         public ICUAlta<PedidoDTO> CUAlta { get; set; }
         public ICUBuscarPorFechaPedido CUBuscarPorFechaPedido { get; set; }
         public ICUAnularPedido CUAnularPedido { get; set; }
-        public ICUBuscarPorId<Pedido> CUBuscarPorIdPedido { get; set; }
-        public ICUListado<Pedido> CUListado {  get; set; }
+        public ICUBuscarPorId<PedidoDTO> CUBuscarPorIdPedido { get; set; }
+        public ICUListado<PedidoNoEntregadoDTO> CUListadoPedidosPendientes {  get; set; }
 
-        public PedidosController(ICUListado<Articulo> cuListadoArticulos, ICUListado<Cliente> cuListadoClientes, ICUAlta<PedidoDTO> cuAlta, ICUBuscarPorFechaPedido cuBuscarPorFechaPedido, ICUAnularPedido cuAnularPedido, ICUBuscarPorId<Pedido> cuBuscarPorIdPedido, ICUListado<Pedido> cuListado) {
+
+        public PedidosController(ICUListado<Articulo> cuListadoArticulos, ICUListado<Cliente> cuListadoClientes, ICUAlta<PedidoDTO> cuAlta, ICUBuscarPorFechaPedido cuBuscarPorFechaPedido, ICUAnularPedido cuAnularPedido, ICUBuscarPorId<PedidoDTO> cuBuscarPorIdPedido, ICUListado<PedidoNoEntregadoDTO> cuListadoPedidosPendientes) {
             CUListadoArticulos = cuListadoArticulos;
             CUListadoClientes = cuListadoClientes;
             CUAlta = cuAlta;
             CUBuscarPorFechaPedido = cuBuscarPorFechaPedido;
             CUAnularPedido = cuAnularPedido;
             CUBuscarPorIdPedido = cuBuscarPorIdPedido;
-            CUListado = cuListado;
+            CUListadoPedidosPendientes = cuListadoPedidosPendientes;
         }
 
         public IActionResult Index() {
-            return View();
+            return View(CUListadoPedidosPendientes.ObtenerListado());
         }
 
         //--------------------------------------------------------------------------
@@ -54,6 +55,7 @@ namespace Obligatorio.Controllers {
                     dto.FechaEntrega = vm.FechaEntrega;
                     dto.IdArticulo = vm.IdArticulo;
                     dto.Cantidad = vm.Cantidad;
+                    dto.Estado = "Pendiente";
 
                     CUAlta.Alta(dto);
 
@@ -73,7 +75,7 @@ namespace Obligatorio.Controllers {
         //----------------------------- ANULAR -------------------------------------
         //--------------------------------------------------------------------------
         public ActionResult AnularPedidos(int id) {
-            Pedido p = CUBuscarPorIdPedido.BuscarPorId(id);
+            PedidoDTO p = CUBuscarPorIdPedido.BuscarPorId(id);
             return View(p);
         }
 
@@ -102,6 +104,29 @@ namespace Obligatorio.Controllers {
             List<PedidoNoEntregadoDTO> pedidos = CUBuscarPorFechaPedido.BuscarPorFechaPedido(fechaABuscar);
             if (pedidos.Count == 0) ViewBag.ErrorMsg = "No existen registros";
             return View(pedidos);
+        }
+
+        //--------------------------------------------------------------------------
+        //------------------------ AGREGAR ARTICULO --------------------------------
+        //--------------------------------------------------------------------------
+        public ActionResult AgregarArticulo(int id) {
+            PedidoDTO p = CUBuscarPorIdPedido.BuscarPorId(id);
+            ViewBag.Articulos = CUListadoArticulos.ObtenerListado();
+            return View(p);
+        }
+
+        [HttpPost]
+        public ActionResult AgregarArticulo(int id, PedidoDTO p) {
+            try {
+                //CUAgregarArticulo.AgregarArticuloEnPedido(p);
+                return RedirectToAction("Index", "Pedidos");
+            } catch (Exception e) {
+                //TODO: refinar exceptions
+                ViewBag.ErrorMsg = e.ToString();
+            }
+
+            ViewBag.Articulos = CUListadoArticulos.ObtenerListado();
+            return View(p);
         }
     }    
 }

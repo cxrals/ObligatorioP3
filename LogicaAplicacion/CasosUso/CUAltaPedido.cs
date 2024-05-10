@@ -31,7 +31,7 @@ namespace LogicaAplicacion.CasosUso {
                 throw new RegistroNoExisteException("El cliente seleccionado para el pedido no existe");
             }
 
-            //TODO reemplazar por map
+            //TODO reemplazar por map ?
             if (articulo != null) {
                 // crear la Linea
                 Linea nuevaLinea = new Linea();
@@ -47,6 +47,14 @@ namespace LogicaAplicacion.CasosUso {
             }
 
             Repo.Create(nuevoPedido);
+        }
+
+        public bool ChequearStock(Articulo articulo, int cantidadSolicitada) {
+            throw new NotImplementedException();
+        }
+
+        public int CalcularTotal(List<Linea> lineas) {
+            throw new NotImplementedException();
         }
     }
 }

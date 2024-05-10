@@ -1,4 +1,5 @@
-﻿using LogicaAplicacion.InterfacesCasosUso;
+﻿using DataTransferObjects;
+using LogicaAplicacion.InterfacesCasosUso;
 using LogicaNegocio.Dominio;
 using LogicaNegocio.InterfacesRepositorios;
 using System;
@@ -8,15 +9,20 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace LogicaAplicacion.CasosUso {
-    public class CUBuscarPorIdPedido : ICUBuscarPorId<Pedido> {
+    public class CUBuscarPorIdPedido : ICUBuscarPorId<PedidoDTO> {
         public IRepositorioPedidos Repo { get; set; }
 
         public CUBuscarPorIdPedido(IRepositorioPedidos repo) {
             Repo = repo;
         }
 
-        public Pedido BuscarPorId(int id) {
-            return Repo.FindById(id);
+        public PedidoDTO BuscarPorId(int id) {
+            PedidoDTO dto = new PedidoDTO();
+            Pedido pedidosEncontrados = Repo.FindById(id);
+            if (pedidosEncontrados != null) {
+                dto = MapperPedidos.CrearDTO(pedidosEncontrados);
+            }
+            return dto;
         }
     }
 }

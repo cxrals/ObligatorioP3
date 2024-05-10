@@ -17,9 +17,19 @@ namespace DataTransferObjects {
             }
 
             p.FechaEntrega = pedidoDTO.FechaEntrega;
-            p.Estado = "Pendiente";
+            p.Estado = pedidoDTO.Estado;
 
             return p;
+        }
+
+        public static PedidoDTO CrearDTO(Pedido pedido) {
+            PedidoDTO pedidoDTO = new PedidoDTO();
+
+            pedidoDTO.Id = pedido.Id;
+            pedidoDTO.FechaEntrega = pedido.FechaEntrega;
+            pedidoDTO.Estado = pedido.Estado;
+
+            return pedidoDTO;
         }
 
         public static List<PedidoNoEntregadoDTO> ToListDto(List<Pedido> pedidos) {

@@ -10,5 +10,6 @@ namespace LogicaNegocio.InterfacesRepositorios {
         void AnularPedido(int id); 
         List<Pedido> BuscarPorFechaDeEmision(DateOnly fecha);
         List<Pedido> OrdenarPedidosAnuladosPorFechaDesc();
+        List<Pedido> ListarPedidosPendientes();
     }
 }

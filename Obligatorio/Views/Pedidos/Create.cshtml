@@ -54,43 +54,6 @@
                     </div>
                 </div>
             </div>
-
-            @* <table class="table">
-                <thead>
-                    <tr>
-                        <th> Artículo </th>
-                        <th> Cantidad </th>
-                        <th></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    
-                        <tr>
-                            <td>
-                                <label asp-for="IdArticulo">Artículo</label>
-                                <select asp-for="IdArticulo" class="form-control">
-                                    @foreach (var articulo in Model.Articulos) {
-                                        <option value="@articulo.Id">@articulo.Nombre</option>
-                                    }
-                                </select>
-                            </td>
-                            <td>
-                                <label asp-for="Cantidad" class="control-label"></label>
-                                <input asp-for="Cantidad" class="form-control" type="number" />
-                                <span asp-validation-for="Cantidad" class="text-danger"></span>
-                            </td>
-                            <td></td>
-                        </tr>
-                    
-                </tbody>
-            </table> *@
-
-
-            @* <div class="form-group">
-                <label asp-for="Cantidad" class="control-label"></label>
-                <input asp-for="Cantidad" class="form-control" type="number" />
-                <span asp-validation-for="Cantidad" class="text-danger"></span>
-            </div> *@
             
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary mt-3" />

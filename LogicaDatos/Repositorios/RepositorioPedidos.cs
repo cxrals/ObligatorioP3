@@ -57,6 +57,10 @@ namespace LogicaDatos.Repositorios {
         public List<Pedido> OrdenarPedidosAnuladosPorFechaDesc() {
             return Contexto.Pedidos.Where(p => p.Estado == "Anulado").Include(p => p.Cliente).OrderByDescending(p => p.Fecha).ToList();
         }
+
+        public List<Pedido> ListarPedidosPendientes() {
+            return Contexto.Pedidos.Where(p => p.Estado == "Pendiente").Include(p => p.Cliente).ToList();
+        }
     }
 }
 // TODO https://learn.microsoft.com/en-us/aspnet/mvc/overview/getting-started/getting-started-with-ef-using-mvc/implementing-inheritance-with-the-entity-framework-in-an-asp-net-mvc-application
