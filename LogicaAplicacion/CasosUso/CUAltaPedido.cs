@@ -26,22 +26,27 @@ namespace LogicaAplicacion.CasosUso {
             Cliente cliente = RepoClientes.FindById(obj.IdCliente);
             Articulo articulo = RepoArticulos.FindById(obj.IdArticulo);
             if (cliente != null) {
-                nuevoPedido.Cliente = cliente;                
+                nuevoPedido.Cliente = cliente;
+                nuevoPedido.CalcularRecargo();
             } else {
                 throw new RegistroNoExisteException("El cliente seleccionado para el pedido no existe");
             }
 
-            //TODO reemplazar por map ?
             if (articulo != null) {
-                // crear la Linea
-                Linea nuevaLinea = new Linea();
-                nuevaLinea.Articulo = articulo;
-                nuevaLinea.PreciodUnitario = articulo.Precio;
-                nuevaLinea.UnidadesSolicitadas = obj.Cantidad;
-                RepoLineas.Create(nuevaLinea);
+                // chequear stock
+                if(ChequearStock(articulo, obj.Cantidad)) {
+                    // crear la Linea
+                    Linea nuevaLinea = new Linea();
+                    nuevaLinea.Articulo = articulo;
+                    nuevaLinea.PreciodUnitario = articulo.Precio;
+                    nuevaLinea.UnidadesSolicitadas = obj.Cantidad;
+                    RepoLineas.Create(nuevaLinea);
 
-                // agregarla al pedido
-                nuevoPedido.Lineas = new List<Linea> { nuevaLinea };
+                    // agregarla al pedido
+                    nuevoPedido.Lineas = new List<Linea> { nuevaLinea };
+                } else {
+                    throw new NoStockException("No hay suficiente stock del artículo seleccionado");
+                }
             } else {
                 throw new RegistroNoExisteException("El artículo seleccionado para el pedido no existe");
             }
@@ -49,11 +54,15 @@ namespace LogicaAplicacion.CasosUso {
             Repo.Create(nuevoPedido);
         }
 
-        public bool ChequearStock(Articulo articulo, int cantidadSolicitada) {
-            throw new NotImplementedException();
+        public static bool ChequearStock(Articulo articulo, int cantidadSolicitada) {
+            if(articulo.Stock >= cantidadSolicitada) {
+                return true;
+            } else {
+                return false;
+            }
         }
 
-        public int CalcularTotal(List<Linea> lineas) {
+        public static int CalcularTotal(List<Linea> lineas) {
             throw new NotImplementedException();
         }
     }

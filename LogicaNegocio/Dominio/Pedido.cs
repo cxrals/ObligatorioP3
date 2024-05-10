@@ -19,10 +19,13 @@ namespace LogicaNegocio.Dominio {
         public int Iva { get { return _iva; } set { _iva = value; } }
         public string Estado { get; set; } // Pendiente, Entregado, Anulado
 
-        public void EsValido() {
+        public virtual void EsValido() {
             if (Lineas.Count == 0) {
                 throw new DatosInvalidosException("El pedido debe contener al menos un artículo");
             }
+        }
+
+        public virtual void CalcularRecargo() {
         }
     }
 }
