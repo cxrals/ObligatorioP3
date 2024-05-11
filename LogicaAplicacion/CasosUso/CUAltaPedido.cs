@@ -15,14 +15,17 @@ namespace LogicaAplicacion.CasosUso {
         public IRepositorioClientes RepoClientes { get; set; }
         public IRepositorioArticulos RepoArticulos { get; set; }
         public IRepositorioLineas RepoLineas { get; set; }
-        public CUAltaPedido(IRepositorioPedidos repo, IRepositorioClientes repoClientes, IRepositorioArticulos repoArticulos, IRepositorioLineas repoLineas) {
+        public IRepositorioParametros RepoParametros { get; set; }
+        public CUAltaPedido(IRepositorioPedidos repo, IRepositorioClientes repoClientes, IRepositorioArticulos repoArticulos, IRepositorioLineas repoLineas, IRepositorioParametros repoParametros) {
             Repo = repo;
             RepoClientes = repoClientes;
             RepoArticulos = repoArticulos;
             RepoLineas = repoLineas;
+            RepoParametros = repoParametros;
         }
         public void Alta(PedidoDTO obj) {
             Pedido nuevoPedido = MapperPedidos.CrearEntidad(obj);
+            Pedido._iva = RepoParametros.ObtenerIva();
             Cliente cliente = RepoClientes.FindById(obj.IdCliente);
             Articulo articulo = RepoArticulos.FindById(obj.IdArticulo);
             if (cliente != null) {

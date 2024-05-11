@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace LogicaNegocio.InterfacesRepositorios {
-    public interface IRepositorioParametros : IRepositorio<Parametro> {
+    public interface IRepositorioParametros {
+        public decimal ObtenerIva();
     }
 }
