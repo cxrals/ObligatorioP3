@@ -8,14 +8,16 @@ using System.Threading.Tasks;
 namespace LogicaNegocio.ValueObjects {
     //[Owned]
     public class Calle {
+        public int DireccionId { get; set; }
         public string Valor { get; init; }
         private Calle() {
 
         }
 
-        public Calle(string valor) {
+        public Calle(string valor, int direccionId) {
             Valor = valor;
             Validar();
+            DireccionId = direccionId;
         }
 
         private void Validar() {

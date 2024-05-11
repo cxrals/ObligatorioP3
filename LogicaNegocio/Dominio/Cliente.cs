@@ -15,11 +15,12 @@ namespace LogicaNegocio.Dominio {
     public class Cliente : IValidar {
         [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
-        public string RazonSocial { get; set; }
+        [Display(Name = "Razon Social")]
+        public string? RazonSocial { get; set; }
         [StringLength(12, MinimumLength = 12)]
-        public string Rut { get; set; } // 12 digitos
+        public string? Rut { get; set; } // 12 digitos
         public Direccion Direccion { get; set; } // calle, numero, ciudad
-        public int DistanciaHastaDeposito { get; set; }
+        public int? DistanciaHastaDeposito { get; set; }
         public void EsValido() {
             if (Rut.Length != 12) {
                 throw new DatosInvalidosException("El RUT debe tener 12 dígitos.");

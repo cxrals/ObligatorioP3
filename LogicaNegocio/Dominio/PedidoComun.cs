@@ -8,13 +8,20 @@ using System.Threading.Tasks;
 
 namespace LogicaNegocio.Dominio {
     public class PedidoComun : Pedido, IValidar {
-        public int _recargo;
+        public decimal _recargo;
         private int _plazoEstipulado;
-        public int Recargo {
+
+        // si Cliente.DistanciaHastaDeposito > 100 ? 5% : 0
+        public decimal Recargo {
             get { return _recargo; }
             set { _recargo = value; }
-        } // si Cliente.DistanciaHastaDeposito > 100 ? 5% : 0
-        public int PlazoEstipulado { get { return _plazoEstipulado = FechaEntrega.DayNumber - Fecha.DayNumber; } set { _plazoEstipulado = value; } } // > 7 dias
+        }
+
+        // > 7 dias
+        public int PlazoEstipulado { 
+            get { return _plazoEstipulado = FechaEntrega.DayNumber - Fecha.DayNumber; } 
+            set { _plazoEstipulado = value; } 
+        } 
 
         public override void EsValido() {
             if (PlazoEstipulado < 7) {
@@ -23,7 +30,9 @@ namespace LogicaNegocio.Dominio {
         }
 
         public override void CalcularRecargo() {
-            _recargo = Cliente != null && Cliente.DistanciaHastaDeposito > 100 ? 5 : 0;
+            _recargo = Cliente != null && Cliente.DistanciaHastaDeposito > 100 ? 0.05M : 0;
         }
     }
+    // The literal with the M suffix is of type decimal
+    // https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/floating-point-numeric-types
 }

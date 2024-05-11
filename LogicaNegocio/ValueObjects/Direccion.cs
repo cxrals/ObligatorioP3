@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 namespace LogicaNegocio.ValueObjects {
     [Owned]
     public class Direccion {
+        public int ClienteId { get; set; }
         public Calle Calle { get; set; }
         public NumeroPuerta NumeroPuerta { get; set; }
         public Ciudad Ciudad { get; set; }
@@ -18,10 +19,11 @@ namespace LogicaNegocio.ValueObjects {
             
         }
 
-        public Direccion(Calle calle, NumeroPuerta nroPuerta, Ciudad ciudad) {
+        public Direccion(int clienteId, Calle calle, NumeroPuerta nroPuerta, Ciudad ciudad) {
             Calle = calle;
             NumeroPuerta = nroPuerta;
             Ciudad = ciudad;
+            ClienteId  = clienteId;
         }
     }
 }

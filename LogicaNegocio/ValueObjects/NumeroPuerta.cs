@@ -6,14 +6,16 @@ using System.Threading.Tasks;
 
 namespace LogicaNegocio.ValueObjects {
     public class NumeroPuerta {
+        public int DireccionId { get; set; }
         public string Valor { get; init; }
         private NumeroPuerta() {
 
         }
 
-        public NumeroPuerta(string valor) {
+        public NumeroPuerta(string valor, int direccionId) {
             Valor = valor;
             Validar();
+            DireccionId = direccionId;
         }
 
         private void Validar() {

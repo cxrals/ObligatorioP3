@@ -37,7 +37,7 @@ namespace DataTransferObjects {
                 Id = p.Id,
                 FechaEntrega = p.FechaEntrega,
                 RazonSocialCliente = p.Cliente.RazonSocial,
-                Total = p.Iva
+                Total = p.Total
             })
             .ToList();
         }

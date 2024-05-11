@@ -44,6 +44,7 @@ builder.Services.AddScoped<IRepositorioClientes, RepositorioClientes>();
 builder.Services.AddScoped<IRepositorioArticulos, RepositorioArticulos>();
 builder.Services.AddScoped<IRepositorioPedidos, RepositorioPedidos>();
 builder.Services.AddScoped<IRepositorioLineas, RepositorioLineas>();
+builder.Services.AddScoped<IRepositorioParametros, RepositorioParametros>();
 
 string conStr = builder.Configuration.GetConnectionString("Caro-Zenbook");
 builder.Services.AddDbContext<ObligatorioContext>(options => options.UseSqlServer(conStr));

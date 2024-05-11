@@ -42,7 +42,7 @@ namespace Obligatorio.Controllers {
 
             if (CUAutenticarUsuario.Autenticar(model.Email, model.Password, out Usuario u)) {
                 HttpContext.Session.SetString("EMAIL", model.Email);
-                HttpContext.Session.SetString("TIPOUSUARIO", u.Tipo);
+                HttpContext.Session.SetString("TIPOUSUARIO", u.Tipo.ToString());
                 return RedirectToAction("Index","Home");
             }
 

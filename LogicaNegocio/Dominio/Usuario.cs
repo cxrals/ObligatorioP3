@@ -23,7 +23,8 @@ namespace LogicaNegocio.Dominio {
         [MinLength(6)]
         [RegularExpression(@"^(?=.*[A-Z])(?=.*[a-z])(?=.*[.!;]).{6,}$")]
         public string Contraseña { get; set; } // min 6 char, mayuscula, minuscula, char especial (punto, punto y coma, coma, signo de admiración de cierre)
-        public string Tipo { get; set; }
+        [Column(TypeName = "nvarchar(24)")]
+        public TipoUsuario Tipo { get; set; }
 
         public void EsValido() {
             // TODO
@@ -41,4 +42,10 @@ namespace LogicaNegocio.Dominio {
 
         // TODO encriptado de password
     }
+
+    public enum TipoUsuario {
+        Administrador,
+        Estandar
+    }
+    // https://learn.microsoft.com/en-us/ef/core/modeling/value-conversions?tabs=data-annotations#pre-defined-conversions
 }
