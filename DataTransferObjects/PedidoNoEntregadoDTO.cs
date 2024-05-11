@@ -12,6 +12,6 @@ namespace DataTransferObjects {
         public int Id { get; set; }
         public DateOnly FechaEntrega { get; set; }
         public string RazonSocialCliente { get; set; }
-        public int Total {  get; set; }
+        public decimal Total {  get; set; }
     }
 }

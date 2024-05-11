@@ -16,7 +16,7 @@ namespace LogicaNegocio.Dominio {
         public DateOnly FechaEntrega { get; set; }
         public Cliente Cliente { get; set; }
         public List<Linea> Lineas { get; set; }
-        public int Total { get; set; }
+        public decimal Total { get; set; }
         public decimal Iva { get { return _iva; } set { _iva = value; } }
         public string Estado { get; set; } // Pendiente, Entregado, Anulado
 

@@ -47,6 +47,7 @@ namespace LogicaAplicacion.CasosUso {
 
                     // agregarla al pedido
                     nuevoPedido.Lineas = new List<Linea> { nuevaLinea };
+                    nuevoPedido.Total = CalcularTotal(nuevoPedido, nuevoPedido.Lineas);
                 } else {
                     throw new NoStockException("No hay suficiente stock del artículo seleccionado");
                 }
@@ -65,8 +66,18 @@ namespace LogicaAplicacion.CasosUso {
             }
         }
 
-        public static int CalcularTotal(List<Linea> lineas) {
-            throw new NotImplementedException();
+        public static decimal CalcularTotal(Pedido p, List<Linea> lineas) {
+            decimal resultado = 0;
+            decimal montoArticulos = 0;
+            decimal iva = p.Iva + 1;
+            // todo: falta reccargo
+            foreach ( Linea linea in  lineas ) {
+                montoArticulos =+ linea.PreciodUnitario * linea.UnidadesSolicitadas;
+            }
+
+            resultado = montoArticulos * iva;
+
+            return resultado;
         }
     }
 }
