@@ -96,6 +96,42 @@ namespace LogicaDatos.Migrations
                             Nombre = "Silla De Escritorio",
                             Precio = 3200,
                             Stock = 20
+                        },
+                        new
+                        {
+                            Id = 5,
+                            CodigoProveedor = "1234597890124",
+                            Descripcion = "Block de notas autoadhesivas",
+                            Nombre = "Notas Adhesivas",
+                            Precio = 50,
+                            Stock = 100
+                        },
+                        new
+                        {
+                            Id = 6,
+                            CodigoProveedor = "1274597890124",
+                            Descripcion = "100 unidades",
+                            Nombre = "Bandas Elásticas",
+                            Precio = 150,
+                            Stock = 90
+                        },
+                        new
+                        {
+                            Id = 7,
+                            CodigoProveedor = "1834597890124",
+                            Descripcion = "Hasta 100 hojas",
+                            Nombre = "Engrampadora",
+                            Precio = 800,
+                            Stock = 10
+                        },
+                        new
+                        {
+                            Id = 8,
+                            CodigoProveedor = "1236597890124",
+                            Descripcion = "HD, FullHD y 4K",
+                            Nombre = "Cable HDMI",
+                            Precio = 200,
+                            Stock = 10
                         });
                 });
 
@@ -130,22 +166,43 @@ namespace LogicaDatos.Migrations
                         {
                             Id = 1,
                             DistanciaHastaDeposito = 98,
-                            RazonSocial = "PF",
+                            RazonSocial = "Fleetium Macs",
                             Rut = "123456789012"
                         },
                         new
                         {
                             Id = 2,
                             DistanciaHastaDeposito = 101,
-                            RazonSocial = "LZ",
+                            RazonSocial = "Pink Folks",
                             Rut = "987654321098"
                         },
                         new
                         {
                             Id = 3,
                             DistanciaHastaDeposito = 96,
-                            RazonSocial = "TWS",
+                            RazonSocial = "Thurston & Kim Co.",
                             Rut = "111222333444"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            DistanciaHastaDeposito = 94,
+                            RazonSocial = "Nueva Helvecia Dolls",
+                            Rut = "111222333555"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            DistanciaHastaDeposito = 82,
+                            RazonSocial = "Fenix",
+                            Rut = "111222333666"
+                        },
+                        new
+                        {
+                            Id = 6,
+                            DistanciaHastaDeposito = 91,
+                            RazonSocial = "AB/CD",
+                            Rut = "111222333777"
                         });
                 });
 
@@ -235,8 +292,11 @@ namespace LogicaDatos.Migrations
                     b.Property<decimal>("Iva")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<int>("Total")
-                        .HasColumnType("int");
+                    b.Property<decimal>("Recargo")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal>("Total")
+                        .HasColumnType("decimal(18,2)");
 
                     b.HasKey("Id");
 
@@ -259,6 +319,9 @@ namespace LogicaDatos.Migrations
 
                     b.Property<string>("Apellido")
                         .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ContraseniaEncriptada")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Contraseña")
@@ -312,9 +375,6 @@ namespace LogicaDatos.Migrations
                     b.Property<int>("PlazoEstipulado")
                         .HasColumnType("int");
 
-                    b.Property<decimal>("Recargo")
-                        .HasColumnType("decimal(18,2)");
-
                     b.HasDiscriminator().HasValue("PedidoComun");
                 });
 
@@ -325,16 +385,10 @@ namespace LogicaDatos.Migrations
                     b.Property<int>("PlazoEstipulado")
                         .HasColumnType("int");
 
-                    b.Property<decimal>("Recargo")
-                        .HasColumnType("decimal(18,2)");
-
                     b.ToTable("Pedidos", t =>
                         {
                             t.Property("PlazoEstipulado")
                                 .HasColumnName("PedidoExpress_PlazoEstipulado");
-
-                            t.Property("Recargo")
-                                .HasColumnName("PedidoExpress_Recargo");
                         });
 
                     b.HasDiscriminator().HasValue("PedidoExpress");
@@ -385,6 +439,21 @@ namespace LogicaDatos.Migrations
                                         {
                                             DireccionId = 3,
                                             Valor = "Durazno"
+                                        },
+                                        new
+                                        {
+                                            DireccionId = 4,
+                                            Valor = "San Jose"
+                                        },
+                                        new
+                                        {
+                                            DireccionId = 5,
+                                            Valor = "Maldonado"
+                                        },
+                                        new
+                                        {
+                                            DireccionId = 6,
+                                            Valor = "Canelones"
                                         });
                                 });
 
@@ -418,6 +487,21 @@ namespace LogicaDatos.Migrations
                                         new
                                         {
                                             DireccionId = 3,
+                                            Valor = "Montevideo"
+                                        },
+                                        new
+                                        {
+                                            DireccionId = 4,
+                                            Valor = "Montevideo"
+                                        },
+                                        new
+                                        {
+                                            DireccionId = 5,
+                                            Valor = "Montevideo"
+                                        },
+                                        new
+                                        {
+                                            DireccionId = 6,
                                             Valor = "Montevideo"
                                         });
                                 });
@@ -453,6 +537,21 @@ namespace LogicaDatos.Migrations
                                         {
                                             DireccionId = 3,
                                             Valor = "902"
+                                        },
+                                        new
+                                        {
+                                            DireccionId = 4,
+                                            Valor = "1060"
+                                        },
+                                        new
+                                        {
+                                            DireccionId = 5,
+                                            Valor = "2010"
+                                        },
+                                        new
+                                        {
+                                            DireccionId = 6,
+                                            Valor = "1110"
                                         });
                                 });
 
@@ -477,6 +576,18 @@ namespace LogicaDatos.Migrations
                                 new
                                 {
                                     ClienteId = 3
+                                },
+                                new
+                                {
+                                    ClienteId = 4
+                                },
+                                new
+                                {
+                                    ClienteId = 5
+                                },
+                                new
+                                {
+                                    ClienteId = 6
                                 });
                         });
 

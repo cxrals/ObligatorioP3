@@ -4,6 +4,7 @@ using LogicaAplicacion.InterfacesCasosUso;
 using LogicaNegocio.Dominio;
 using LogicaNegocio.Excepciones;
 using Microsoft.AspNetCore.Mvc;
+using Obligatorio.Filters;
 using Obligatorio.Models;
 
 namespace Obligatorio.Controllers {
@@ -39,6 +40,7 @@ namespace Obligatorio.Controllers {
 
         }
 
+        [Privado(TipoUsuarios = "Administrador")]
         public IActionResult Index() {
             return View(CUListadoPedidosPendientes.ObtenerListado());
         }
@@ -46,6 +48,7 @@ namespace Obligatorio.Controllers {
         //--------------------------------------------------------------------------
         //----------------------------- CREATE -------------------------------------
         //--------------------------------------------------------------------------
+        [Privado(TipoUsuarios = "Administrador")]
         public ActionResult Create() {
             AltaPedidoViewModel vm = new AltaPedidoViewModel() {
                 Articulos = CUListadoArticulos.ObtenerListado(),
@@ -54,6 +57,7 @@ namespace Obligatorio.Controllers {
             return View(vm);
         }
 
+        [Privado(TipoUsuarios = "Administrador")]
         [HttpPost]
         public ActionResult Create(AltaPedidoViewModel vm) {
             try {
@@ -86,11 +90,13 @@ namespace Obligatorio.Controllers {
         //--------------------------------------------------------------------------
         //----------------------------- ANULAR -------------------------------------
         //--------------------------------------------------------------------------
+        [Privado(TipoUsuarios = "Administrador")]
         public ActionResult AnularPedidos(int id) {
             PedidoDTO p = CUBuscarPorIdPedido.BuscarPorId(id);
             return View(p);
         }
 
+        [Privado(TipoUsuarios = "Administrador")]
         [HttpPost]
         public ActionResult AnularPedidos(int id, Pedido p) {
             try {
@@ -105,10 +111,12 @@ namespace Obligatorio.Controllers {
         //--------------------------------------------------------------------------
         //----------------------------- BUSCAR -------------------------------------
         //--------------------------------------------------------------------------
+        [Privado(TipoUsuarios = "Administrador")]
         public ActionResult BuscarPedidos() {
             return View();
         }
 
+        [Privado(TipoUsuarios = "Administrador")]
         [HttpPost]
         public ActionResult BuscarPedidos(string fecha) {
             try {
@@ -126,12 +134,14 @@ namespace Obligatorio.Controllers {
         //--------------------------------------------------------------------------
         //------------------------ AGREGAR ARTICULO --------------------------------
         //--------------------------------------------------------------------------
+        [Privado(TipoUsuarios = "Administrador")]
         public ActionResult AgregarArticulo(int id) {
             PedidoDTO p = CUBuscarPorIdPedido.BuscarPorId(id);
             ViewBag.Articulos = CUListadoArticulos.ObtenerListado();
             return View(p);
         }
 
+        [Privado(TipoUsuarios = "Administrador")]
         [HttpPost]
         public ActionResult AgregarArticulo(int id, PedidoDTO p) {
             try {

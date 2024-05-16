@@ -13,6 +13,7 @@ namespace DataTransferObjects {
         public DateOnly FechaEntrega { get; set; }
         public string RazonSocialCliente { get; set; }
         public decimal Iva {  get; set; }
+        public decimal Recargo {  get; set; }
         public decimal Total {  get; set; }
     }
 }

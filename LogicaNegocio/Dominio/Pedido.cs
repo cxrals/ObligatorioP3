@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace LogicaNegocio.Dominio {
-    public class Pedido : IValidar {
+    public abstract class Pedido : IValidar {
         private DateOnly _fecha = DateOnly.FromDateTime(DateTime.Now);
         public static decimal _iva;
 
@@ -18,6 +18,7 @@ namespace LogicaNegocio.Dominio {
         public List<Linea> Lineas { get; set; }
         public decimal Total { get; set; }
         public decimal Iva { get { return _iva; } set { _iva = value; } }
+        public decimal Recargo { get; set; }
         public string Estado { get; set; } // Pendiente, Entregado, Anulado
 
         public virtual void EsValido() {
@@ -26,7 +27,6 @@ namespace LogicaNegocio.Dominio {
             }
         }
 
-        public virtual void CalcularRecargo() {
-        }
+        public abstract void CalcularRecargo(decimal a, decimal b);
     }
 }

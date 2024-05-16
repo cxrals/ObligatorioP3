@@ -30,9 +30,16 @@ namespace LogicaAplicacion.CasosUso {
             Articulo articulo = RepoArticulos.FindById(obj.IdArticulo);
             if (cliente != null) {
                 nuevoPedido.Cliente = cliente;
-                nuevoPedido.CalcularRecargo();
+                
             } else {
                 throw new RegistroNoExisteException("El cliente seleccionado para el pedido no existe");
+            }
+
+            if(obj.TipoPedido == "PedidoExpress") {
+                nuevoPedido.CalcularRecargo(0.15m,0.1m);
+                
+            } else {
+                nuevoPedido.CalcularRecargo(0.05m, 0);
             }
 
             if (articulo != null) {
@@ -70,12 +77,13 @@ namespace LogicaAplicacion.CasosUso {
             decimal resultado = 0;
             decimal montoArticulos = 0;
             decimal iva = p.Iva + 1;
-            // todo: falta reccargo
+            decimal recargo = p.Recargo + 1;
+
             foreach ( Linea linea in  lineas ) {
                 montoArticulos =+ linea.PreciodUnitario * linea.UnidadesSolicitadas;
             }
 
-            resultado = montoArticulos * iva;
+            resultado = montoArticulos * iva * recargo;
 
             return resultado;
         }

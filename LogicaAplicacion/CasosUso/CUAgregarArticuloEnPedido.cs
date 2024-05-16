@@ -58,12 +58,13 @@ namespace LogicaAplicacion.CasosUso {
             decimal resultado = 0;
             decimal montoArticulos = 0;
             decimal iva = p.Iva + 1;
-            // todo: falta reccargo
+            decimal recargo = p.Recargo + 1;
+
             foreach (Linea linea in lineas) {
                 montoArticulos += linea.PreciodUnitario * linea.UnidadesSolicitadas;
             }
 
-            resultado = montoArticulos * iva;
+            resultado = montoArticulos * iva * recargo;
 
             return resultado;
         }

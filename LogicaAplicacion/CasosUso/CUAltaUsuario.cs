@@ -17,19 +17,30 @@ namespace LogicaAplicacion.CasosUso {
             Repo = repo;
         }
         public void Alta(Usuario obj) {
-            obj.ContraseniaEncriptada = EncryptionUtility.EncryptString(obj.Contraseña);
+            byte[] key = EncryptionUtility.GenerateRandomKey();
+            byte[] iv = EncryptionUtility.GenerateRandomIV();
+            obj.ContraseniaEncriptada = EncryptionUtility.EncryptString(obj.Contraseña, key, iv);
             Repo.Create(obj);
         }
     }
 
     public class EncryptionUtility {
-        private static readonly byte[] Key = Encoding.UTF8.GetBytes("your_secret_key_here");
-        private static readonly byte[] IV = Encoding.UTF8.GetBytes("your_initialization_vector_here");
-
-        public static string EncryptString(string plainText) {
+        public static byte[] GenerateRandomKey() {
             using var aes = Aes.Create();
-            aes.Key = Key;
-            aes.IV = IV;
+            aes.GenerateKey();
+            return aes.Key;
+        }
+
+        public static byte[] GenerateRandomIV() {
+            using var aes = Aes.Create();
+            aes.GenerateIV();
+            return aes.IV;
+        }
+
+        public static string EncryptString(string plainText, byte[] key, byte[] iv) {
+            using var aes = Aes.Create();
+            aes.Key = key;
+            aes.IV = iv;
 
             var encryptor = aes.CreateEncryptor(aes.Key, aes.IV);
             using var msEncrypt = new MemoryStream();

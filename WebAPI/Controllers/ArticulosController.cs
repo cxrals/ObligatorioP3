@@ -16,8 +16,19 @@ namespace WebAPI.Controllers {
         // GET: api/<ArticulosController>
         [HttpGet]
         public IActionResult Get() {
-            List<ArticuloDTO> articuloDTOs = CUOrdenarArticulosAsc.OrdenarPorNombreAsc();
-            return Ok(articuloDTOs);
+            try {
+                List<ArticuloDTO> articuloDTOs = CUOrdenarArticulosAsc.OrdenarPorNombreAsc();
+                if (articuloDTOs.Any()) {
+                    // 200 ok
+                    return Ok(articuloDTOs);
+                } else {
+                    // 404 - Not Found
+                    return NotFound("No existen artículos.");
+                }
+            } catch (Exception ex) {
+                // 500 - Internal Server Error
+                return StatusCode(500, "Ocurrió un error en el servidor.");
+            }
         }
 
         // GET api/<ArticulosController>/5

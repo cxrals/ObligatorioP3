@@ -72,6 +72,7 @@ namespace LogicaDatos.Migrations
                     Nombre = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Apellido = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Contraseña = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ContraseniaEncriptada = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Tipo = table.Column<string>(type: "nvarchar(24)", nullable: false)
                 },
                 constraints: table =>
@@ -88,13 +89,12 @@ namespace LogicaDatos.Migrations
                     Fecha = table.Column<DateOnly>(type: "date", nullable: false),
                     FechaEntrega = table.Column<DateOnly>(type: "date", nullable: false),
                     ClienteId = table.Column<int>(type: "int", nullable: false),
-                    Total = table.Column<int>(type: "int", nullable: false),
+                    Total = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     Iva = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    Recargo = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     Estado = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Discriminator = table.Column<string>(type: "nvarchar(13)", maxLength: 13, nullable: false),
-                    Recargo = table.Column<decimal>(type: "decimal(18,2)", nullable: true),
                     PlazoEstipulado = table.Column<int>(type: "int", nullable: true),
-                    PedidoExpress_Recargo = table.Column<decimal>(type: "decimal(18,2)", nullable: true),
                     PedidoExpress_PlazoEstipulado = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
@@ -143,7 +143,11 @@ namespace LogicaDatos.Migrations
                     { 1, "1234567890123", "Calculadora de bolsillo Casio", "Calculadora Casio", 300, 10 },
                     { 2, "1234567890124", "500 hojas para imprimir en formato A4", "Resma A4", 250, 50 },
                     { 3, "1234567890125", "Bluetooth o conexión USB, cable desmontable", "Auriculares con Micrófono", 500, 40 },
-                    { 4, "1234567890126", "Soporte lumbar, altura ajustable y base giratoria con ruedas", "Silla De Escritorio", 3200, 20 }
+                    { 4, "1234567890126", "Soporte lumbar, altura ajustable y base giratoria con ruedas", "Silla De Escritorio", 3200, 20 },
+                    { 5, "1234597890124", "Block de notas autoadhesivas", "Notas Adhesivas", 50, 100 },
+                    { 6, "1274597890124", "100 unidades", "Bandas Elásticas", 150, 90 },
+                    { 7, "1834597890124", "Hasta 100 hojas", "Engrampadora", 800, 10 },
+                    { 8, "1236597890124", "HD, FullHD y 4K", "Cable HDMI", 200, 10 }
                 });
 
             migrationBuilder.InsertData(
@@ -151,9 +155,12 @@ namespace LogicaDatos.Migrations
                 columns: new[] { "Id", "DistanciaHastaDeposito", "RazonSocial", "Rut", "Direccion_Calle_Valor", "Direccion_Ciudad_Valor", "Direccion_NumeroPuerta_Valor" },
                 values: new object[,]
                 {
-                    { 1, 98, "PF", "123456789012", "Ciudadela", "Montevideo", "1180" },
-                    { 2, 101, "LZ", "987654321098", "Reconquista", "Montevideo", "600" },
-                    { 3, 96, "TWS", "111222333444", "Durazno", "Montevideo", "902" }
+                    { 1, 98, "Fleetium Macs", "123456789012", "Ciudadela", "Montevideo", "1180" },
+                    { 2, 101, "Pink Folks", "987654321098", "Reconquista", "Montevideo", "600" },
+                    { 3, 96, "Thurston & Kim Co.", "111222333444", "Durazno", "Montevideo", "902" },
+                    { 4, 94, "Nueva Helvecia Dolls", "111222333555", "San Jose", "Montevideo", "1060" },
+                    { 5, 82, "Fenix", "111222333666", "Maldonado", "Montevideo", "2010" },
+                    { 6, 91, "AB/CD", "111222333777", "Canelones", "Montevideo", "1110" }
                 });
 
             migrationBuilder.InsertData(
@@ -163,11 +170,11 @@ namespace LogicaDatos.Migrations
 
             migrationBuilder.InsertData(
                 table: "Usuarios",
-                columns: new[] { "Id", "Apellido", "Contraseña", "Email", "Nombre", "Tipo" },
+                columns: new[] { "Id", "Apellido", "ContraseniaEncriptada", "Contraseña", "Email", "Nombre", "Tipo" },
                 values: new object[,]
                 {
-                    { 1, "Admin", "Passw0rd!", "admin@admin.com", "Sys", "Administrador" },
-                    { 2, "Planta", "Passw0rd!", "rplanta@lz.com", "Roberto", "Estandar" }
+                    { 1, "Admin", null, "Passw0rd!", "admin@admin.com", "Sys", "Administrador" },
+                    { 2, "Planta", null, "Passw0rd!", "rplanta@lz.com", "Roberto", "Estandar" }
                 });
 
             migrationBuilder.CreateIndex(

@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Http;
 using Obligatorio.Models;
 using LogicaNegocio.Excepciones;
+using Obligatorio.Filters;
 
 namespace Obligatorio.Controllers {
     public class UsuariosController : Controller {
@@ -23,6 +24,8 @@ namespace Obligatorio.Controllers {
             CUBuscarPorIdUsuario = cuBuscarPorIdUsuario;
             CUBaja = cuBaja;
         }
+
+        [Privado(TipoUsuarios = "Administrador")]
         public IActionResult Index() {
             return View(CUListado.ObtenerListado());
         }
@@ -61,10 +64,12 @@ namespace Obligatorio.Controllers {
         //--------------------------------------------------------------------------
         //----------------------------- CREATE -------------------------------------
         //--------------------------------------------------------------------------
+        [Privado(TipoUsuarios = "Administrador")]
         public ActionResult Create() {
             return View();
         }
 
+        [Privado(TipoUsuarios = "Administrador")]
         [HttpPost]
         public ActionResult Create(Usuario nuevo) {
             try {
@@ -84,11 +89,13 @@ namespace Obligatorio.Controllers {
         //--------------------------------------------------------------------------
         //----------------------------- UPDATE -------------------------------------
         //--------------------------------------------------------------------------
+        [Privado(TipoUsuarios = "Administrador")]
         public ActionResult Edit(int id) {
             Usuario u = CUBuscarPorIdUsuario.BuscarPorId(id);
             return View(u);
         }
 
+        [Privado(TipoUsuarios = "Administrador")]
         [HttpPost]
         public ActionResult Edit(int id, Usuario u) {
             try {
@@ -108,11 +115,13 @@ namespace Obligatorio.Controllers {
         //--------------------------------------------------------------------------
         //----------------------------- DELETE -------------------------------------
         //--------------------------------------------------------------------------
+        [Privado(TipoUsuarios = "Administrador")]
         public ActionResult Delete(int id) {
             Usuario u = CUBuscarPorIdUsuario.BuscarPorId(id);
             return View(u);
         }
 
+        [Privado(TipoUsuarios = "Administrador")]
         [HttpPost]
         public ActionResult Delete(int id, Usuario u) {
             try {

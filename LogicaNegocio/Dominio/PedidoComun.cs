@@ -8,14 +8,7 @@ using System.Threading.Tasks;
 
 namespace LogicaNegocio.Dominio {
     public class PedidoComun : Pedido, IValidar {
-        public decimal _recargo;
         private int _plazoEstipulado;
-
-        // si Cliente.DistanciaHastaDeposito > 100 ? 5% : 0
-        public decimal Recargo {
-            get { return _recargo; }
-            set { _recargo = value; }
-        }
 
         // > 7 dias
         public int PlazoEstipulado { 
@@ -29,8 +22,9 @@ namespace LogicaNegocio.Dominio {
             }
         }
 
-        public override void CalcularRecargo() {
-            _recargo = Cliente != null && Cliente.DistanciaHastaDeposito > 100 ? 0.05M : 0;
+        // si Cliente.DistanciaHastaDeposito > 100 ? 5% : 0
+        public override void CalcularRecargo(decimal a, decimal b) {
+            Recargo = Cliente != null && Cliente.DistanciaHastaDeposito > 100 ? a : b;
         }
     }
 }

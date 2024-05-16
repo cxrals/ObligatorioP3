@@ -18,8 +18,19 @@ namespace WebAPI.Controllers {
         // GET: api/<PedidosController>
         [HttpGet]
         public IActionResult Get() {
-            List<PedidoNoEntregadoDTO> pedidoDTOs = CUOrdenarPedidosAnuladosDesc.OrdenarPorFechaDesc();
-            return Ok(pedidoDTOs);
+            try { 
+                List<PedidoNoEntregadoDTO> pedidoDTOs = CUOrdenarPedidosAnuladosDesc.OrdenarPorFechaDesc();
+                if(pedidoDTOs.Any()) { 
+                    // 200 ok
+                    return Ok(pedidoDTOs);
+                } else {
+                    // 404 - Not Found
+                    return NotFound("No existen pedidos.");
+                }
+            } catch (Exception ex) {
+                // 500 - Internal Server Error
+                return StatusCode(500, "Ocurrió un error en el servidor.");
+            }
         }
 
         // GET api/<PedidosController>/5
