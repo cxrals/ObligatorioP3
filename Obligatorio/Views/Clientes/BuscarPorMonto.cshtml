@@ -1,13 +1,12 @@
 ﻿@model IEnumerable<DataTransferObjects.ClienteDTO>
 
 @{
-    ViewData["Title"] = "Buscar Clientes";
+    ViewData["Title"] = "Buscar Por Monto de Pedido";
 }
 
 <div class="text-center">
     <h1 class="display-4">@ViewData["Title"]</h1>
 </div>
-
 
 <div class="row">
     <div class="col-md-4">
@@ -15,8 +14,8 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
             <div class="form-group">
-                <label class="control-label">Razon Social:</label>
-                <input type="text" name="razonSocial" class="form-control" />
+                <label class="control-label">Monto:</label>
+                <input type="number" name="monto" class="form-control" />
             </div>
             <div class="form-group">
                 <input type="submit" value="Buscar" class="btn btn-primary mt-2" />
@@ -24,6 +23,7 @@
         </form>
     </div>
 </div>
+
 
 @if (Model.Count() > 0) {
     <table class="table">
@@ -39,31 +39,29 @@
                     @Html.DisplayNameFor(model => model.Rut)
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.Direccion)
+                    @Html.DisplayNameFor(model => model.DistanciaHastaDeposito)
                 </th>
             </tr>
         </thead>
         <tbody>
-
-            @foreach (var item in Model) {
-                <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Id)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.RazonSocial)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Rut)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Direccion)
-                    </td>
-                </tr>
-            }
-
+    @foreach (var item in Model) {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.RazonSocial)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Rut)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DistanciaHastaDeposito)
+                </td>
+            </tr>
+    }
         </tbody>
     </table>
 } else {
-    <span>@ViewBag.ErrorMsg</span>
+<span>@ViewBag.ErrorMsg</span>
 }

@@ -39,6 +39,10 @@ namespace LogicaNegocio.Dominio {
             if (Descripcion.Length < 5) {
                 throw new DatosInvalidosException("La descripción debe tener un mínimo de 5 caracteres.");
             }
+
+            if (Precio < 0 || Stock < 0) {
+                throw new DatosInvalidosException("Precio y Stock no pueden ser negativos.");
+            }
         }
     }
 }

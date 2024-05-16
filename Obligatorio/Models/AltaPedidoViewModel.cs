@@ -1,8 +1,9 @@
-﻿using LogicaNegocio.Dominio;
+﻿using DataTransferObjects;
+using LogicaNegocio.Dominio;
 
 namespace Obligatorio.Models {
     public class AltaPedidoViewModel {
-        public List<Cliente>? Clientes { get; set; }
+        public List<ClienteDTO>? Clientes { get; set; }
         public int IdCliente { get; set; }
         public List<Articulo>? Articulos { get; set; }
         public int IdArticulo { get; set; }

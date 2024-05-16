@@ -33,6 +33,4 @@ namespace LogicaNegocio.Dominio {
             _recargo = PlazoEstipulado == 1 ? 0.15M : 0.10M;
         }
     }
-    // The literal with the M suffix is of type decimal
-    // https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/floating-point-numeric-types
 }

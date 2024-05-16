@@ -1,4 +1,4 @@
-﻿@model IEnumerable<LogicaNegocio.Dominio.Cliente>
+﻿@model IEnumerable<DataTransferObjects.ClienteDTO>
 
 @{
     ViewData["Title"] = "Clientes";
@@ -10,6 +10,9 @@
 
 <div>
     <a asp-action="BuscarClientes">Buscar Por Razon Social</a>
+</div>
+<div>
+    <a asp-action="BuscarPorMonto">Buscar Por Monto de Pedido</a>
 </div>
 <span>@ViewBag.ErrorMsg</span>
 
@@ -28,7 +31,6 @@
             <th>
                 @Html.DisplayNameFor(model => model.Direccion)
             </th>
-            <th></th>
         </tr>
     </thead>
     <tbody>
@@ -45,11 +47,6 @@
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Direccion)
-                </td>
-                <td>
-                    @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
-                    @Html.ActionLink("Details", "Details", new { id = item.Id }) |
-                    @Html.ActionLink("Delete", "Delete", new { id = item.Id })
                 </td>
             </tr>
         }

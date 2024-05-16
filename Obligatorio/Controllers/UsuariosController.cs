@@ -4,6 +4,7 @@ using LogicaNegocio.Dominio;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Http;
 using Obligatorio.Models;
+using LogicaNegocio.Excepciones;
 
 namespace Obligatorio.Controllers {
     public class UsuariosController : Controller {
@@ -69,9 +70,12 @@ namespace Obligatorio.Controllers {
             try {
                 CUAlta.Alta(nuevo);
                 return RedirectToAction("Index", "Usuarios");
+            } catch (DatosInvalidosException e) {
+                ViewBag.ErrorMsg = e.Message;
+            } catch (DuplicadoException e) {
+                ViewBag.ErrorMsg = e.Message;
             } catch (Exception e) {
-                //TODO: refinar exceptions
-                ViewBag.ErrorMsg = e.ToString();
+                ViewBag.ErrorMsg = e.Message;
             }
 
             return View();
@@ -90,9 +94,12 @@ namespace Obligatorio.Controllers {
             try {
                 CUModificar.Modificar(u);
                 return RedirectToAction("Index", "Usuarios");
+            } catch (DatosInvalidosException e) {
+                ViewBag.ErrorMsg = e.Message;
+            } catch (DuplicadoException e) {
+                ViewBag.ErrorMsg = e.Message;
             } catch (Exception e) {
-                //TODO: refinar exceptions
-                ViewBag.ErrorMsg = e.ToString();
+                ViewBag.ErrorMsg = e.Message;
             }
 
             return View();
@@ -111,9 +118,10 @@ namespace Obligatorio.Controllers {
             try {
                 CUBaja.Baja(id);
                 return RedirectToAction("Index", "Usuarios");
+            } catch (RegistroNoExisteException e) {
+                ViewBag.ErrorMsg = e.Message;
             } catch (Exception e) {
-                //TODO: refinar exceptions
-                ViewBag.ErrorMsg = e.ToString();
+                ViewBag.ErrorMsg = e.Message;
             }
             return View();
         }

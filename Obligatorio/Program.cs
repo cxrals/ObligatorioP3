@@ -29,13 +29,15 @@ builder.Services.AddScoped<ICUModificar<Usuario>, CUModificarUsuario>();
 builder.Services.AddScoped<ICUBuscarPorId<Usuario>, CUBuscarPorIdUsuario>();
 builder.Services.AddScoped<ICUAutenticarUsuario, CUAutenticarUsuario>();
 
-builder.Services.AddScoped<ICUListado<Cliente>, CUListadoClientes>();
+builder.Services.AddScoped<ICUListado<ClienteDTO>, CUListadoClientes>();
 builder.Services.AddScoped<ICUBuscarPorRazonSocial, CUBuscarPorRazonSocial>();
+builder.Services.AddScoped<ICUBuscarClientesPorMontoPedido, CUBuscarClientesPorMontoPedido>();
 
 builder.Services.AddScoped<ICUAlta<PedidoDTO>, CUAltaPedido>();
 builder.Services.AddScoped<ICUBuscarPorFechaPedido, CUBuscarPorFechaPedido>();
 builder.Services.AddScoped<ICUAnularPedido, CUAnularPedido>();
 builder.Services.AddScoped<ICUBuscarPorId<PedidoDTO>, CUBuscarPorIdPedido>();
+builder.Services.AddScoped<ICUModificar<PedidoDTO>, CUAgregarArticuloEnPedido>();
 builder.Services.AddScoped<ICUListado<Pedido>, CUListadoPedidos>();
 builder.Services.AddScoped<ICUListado<PedidoNoEntregadoDTO>, CUListadoPedidosPendientes>();
 

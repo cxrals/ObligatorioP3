@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Text.RegularExpressions;
 using Microsoft.EntityFrameworkCore;
+using LogicaNegocio.Excepciones;
 
 namespace LogicaNegocio.Dominio {
     [Index(nameof(Email), IsUnique = true)]
@@ -23,24 +24,26 @@ namespace LogicaNegocio.Dominio {
         [MinLength(6)]
         [RegularExpression(@"^(?=.*[A-Z])(?=.*[a-z])(?=.*[.!;]).{6,}$")]
         public string Contraseña { get; set; } // min 6 char, mayuscula, minuscula, char especial (punto, punto y coma, coma, signo de admiración de cierre)
+        public string? ContraseniaEncriptada { get; set; }
         [Column(TypeName = "nvarchar(24)")]
         public TipoUsuario Tipo { get; set; }
 
         public void EsValido() {
-            // TODO
+            if(!ValidarContraseña(Contraseña)) {
+                throw new DatosInvalidosException("La contraseña debe tener un mínimo de 6 caracteres, al menos una mayuscula y una minuscula y un caracter especial (punto, coma, punto y coma o signo de admiración)");
+            }
+            //TODO: VO para nombre y apellido?
         }
 
-        private Boolean ValidarContraseña(String contraseña) {
-            var hasNumber = new Regex(@"[0-9]+");
-            var hasUpperChar = new Regex(@"[A-Z]+");
-            var hasLowerChar = new Regex(@"[a-z]+");
-            var hasMinimum6Chars = new Regex(@".{6,}");
-            var hasSymbols = new Regex(@"[!;,.?]");
+        private bool ValidarContraseña(String contraseña) {
+            var tieneNumero = new Regex(@"[0-9]+");
+            var tieneMayuscula = new Regex(@"[A-Z]+");
+            var tieneMinuscula = new Regex(@"[a-z]+");
+            var tieneMinSeisChar = new Regex(@".{6,}");
+            var tieneSimbolos = new Regex(@"[!;,.?]");
 
-            return hasNumber.IsMatch(contraseña) && hasUpperChar.IsMatch(contraseña);
+            return tieneNumero.IsMatch(contraseña) && tieneMayuscula.IsMatch(contraseña) && tieneMinuscula.IsMatch(contraseña) && tieneMinSeisChar.IsMatch(contraseña) && tieneSimbolos.IsMatch(contraseña);
         }
-
-        // TODO encriptado de password
     }
 
     public enum TipoUsuario {

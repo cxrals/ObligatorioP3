@@ -11,5 +11,6 @@ namespace LogicaNegocio.InterfacesRepositorios {
         List<Pedido> BuscarPorFechaDeEmision(DateOnly fecha);
         List<Pedido> OrdenarPedidosAnuladosPorFechaDesc();
         List<Pedido> ListarPedidosPendientes();
+        List<Cliente> BuscarClientes(decimal monto);
     }
 }

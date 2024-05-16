@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using DataTransferObjects;
 
 namespace LogicaAplicacion.CasosUso {
     public class CUBuscarPorRazonSocial : ICUBuscarPorRazonSocial {
@@ -13,8 +14,10 @@ namespace LogicaAplicacion.CasosUso {
         public CUBuscarPorRazonSocial(IRepositorioClientes repo) {
             Repo = repo;
         }
-        public List<Cliente> BuscarPorRazonSocial(string nombre) {
-            return Repo.BuscarPorRazonSocial(nombre);
+        public List<ClienteDTO> BuscarPorRazonSocial(string nombre) {
+            List<Cliente> clientes = Repo.BuscarPorRazonSocial(nombre);
+            List<ClienteDTO> clientesDTO = MapperClientes.ToListDto(clientes);
+            return clientesDTO;
         }
     }
 }

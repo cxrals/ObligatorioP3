@@ -36,8 +36,12 @@ namespace LogicaDatos.Repositorios {
 
         public void Update(Usuario obj) {
             obj.EsValido();
-            Contexto.Usuarios.Update(obj);
-            Contexto.SaveChanges();
+            if (!Contexto.Usuarios.Any(u => u.Email.ToLower() == obj.Email.ToLower())) {
+                Contexto.Usuarios.Update(obj);
+                Contexto.SaveChanges();
+            } else {
+                throw new DuplicadoException("Ya existe un usuario registrado con ese email.");
+            }
         }
 
         public Usuario BuscarPorEmail(string email) {

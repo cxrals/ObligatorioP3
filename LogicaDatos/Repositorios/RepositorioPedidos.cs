@@ -28,7 +28,7 @@ namespace LogicaDatos.Repositorios {
         }
 
         public Pedido FindById(int id) {
-            return Contexto.Pedidos.Find(id);
+            return Contexto.Pedidos.Include(p => p.Lineas).FirstOrDefault(p => p.Id == id);
         }
 
         public List<Pedido> GetAll() {
@@ -36,7 +36,10 @@ namespace LogicaDatos.Repositorios {
         }
 
         public void Update(Pedido obj) {
-            //throw new NotImplementedException();
+            obj.EsValido();
+            //Contexto.Entry(obj.Cliente).State = EntityState.Unchanged;
+            Contexto.Pedidos.Update(obj);
+            Contexto.SaveChanges();
         }
 
         public void AnularPedido(int id) {
@@ -61,6 +64,10 @@ namespace LogicaDatos.Repositorios {
         public List<Pedido> ListarPedidosPendientes() {
             return Contexto.Pedidos.Where(p => p.Estado == "Pendiente").Include(p => p.Cliente).ToList();
         }
+
+        public List<Cliente> BuscarClientes(decimal monto) {
+            return Contexto.Pedidos.Where(p => p.Total >= monto).Select(p => p.Cliente).Distinct().ToList();
+        }
     }
 }
-// TODO https://learn.microsoft.com/en-us/aspnet/mvc/overview/getting-started/getting-started-with-ef-using-mvc/implementing-inheritance-with-the-entity-framework-in-an-asp-net-mvc-application
+// https://learn.microsoft.com/en-us/aspnet/mvc/overview/getting-started/getting-started-with-ef-using-mvc/implementing-inheritance-with-the-entity-framework-in-an-asp-net-mvc-application

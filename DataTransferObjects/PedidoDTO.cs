@@ -13,7 +13,5 @@ namespace DataTransferObjects {
         public DateOnly FechaEntrega { get; set; }
         public string TipoPedido { get; set; }
         public string Estado { get; set; }
-
-        // TODO public Map<int, int> articuloCantidadMap ????
     }
 }

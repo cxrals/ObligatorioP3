@@ -1,6 +1,7 @@
 ﻿using DataTransferObjects;
 using LogicaAplicacion.InterfacesCasosUso;
 using LogicaNegocio.Dominio;
+using LogicaNegocio.Excepciones;
 using LogicaNegocio.InterfacesRepositorios;
 using System;
 using System.Collections.Generic;
@@ -21,6 +22,8 @@ namespace LogicaAplicacion.CasosUso {
             Pedido pedidosEncontrados = Repo.FindById(id);
             if (pedidosEncontrados != null) {
                 dto = MapperPedidos.CrearDTO(pedidosEncontrados);
+            } else {
+                throw new RegistroNoExisteException("El pedido no existe");
             }
             return dto;
         }

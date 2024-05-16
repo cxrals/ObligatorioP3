@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace LogicaAplicacion.InterfacesCasosUso {
-    public interface ICUBuscarPorRazonSocial {
-        List<ClienteDTO> BuscarPorRazonSocial(string nombre);
+    public interface ICUBuscarClientesPorMontoPedido {
+        List<ClienteDTO> BuscarPorMontoPedido(decimal monto);
     }
 }
