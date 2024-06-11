@@ -90,7 +90,8 @@ namespace LogicaDatos.Repositorios {
             
             modelBuilder.Entity<Usuario>().HasData(
                 new Usuario { Id = 1, Email = "admin@admin.com", Nombre = "Sys", Apellido = "Admin", Contraseña = "Passw0rd!", Tipo = TipoUsuario.Administrador },
-                new Usuario { Id = 2, Email = "rplanta@lz.com", Nombre = "Roberto", Apellido = "Planta", Contraseña = "Passw0rd!", Tipo = TipoUsuario.Estandar }
+                new Usuario { Id = 2, Email = "rplanta@lz.com", Nombre = "Roberto", Apellido = "Planta", Contraseña = "Passw0rd!", Tipo = TipoUsuario.Estandar },
+                new Usuario { Id = 2, Email = "jblanco@tws.com", Nombre = "Jacobo", Apellido = "Blanco", Contraseña = "Passw0rd!", Tipo = TipoUsuario.Encargado }
             );
 
             modelBuilder.Entity<Articulo>().HasData(

@@ -48,6 +48,7 @@ namespace LogicaNegocio.Dominio {
 
     public enum TipoUsuario {
         Administrador,
+        Encargado,
         Estandar
     }
     // https://learn.microsoft.com/en-us/ef/core/modeling/value-conversions?tabs=data-annotations#pre-defined-conversions
