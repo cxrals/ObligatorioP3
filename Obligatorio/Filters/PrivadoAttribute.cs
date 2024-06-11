@@ -14,7 +14,7 @@ namespace Obligatorio.Filters {
         public void OnActionExecuting(ActionExecutingContext context) {
             bool usuarioAutenticado = !string.IsNullOrEmpty(context.HttpContext.Session.GetString("TIPOUSUARIO"));
             if (!usuarioAutenticado) {
-                context.Result = new RedirectResult("/home/ingresar");
+                context.Result = new RedirectResult("/usuarios/ingresar");
             } else {
                 if (!string.IsNullOrEmpty(TipoUsuarios)) {
                     if (!TipoUsuarios.Split(",").Contains(context.HttpContext.Session.GetString("TIPOUSUARIO")))
