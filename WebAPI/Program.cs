@@ -2,10 +2,12 @@ using DataTransferObjects;
 using LogicaAplicacion.CasosUso;
 using LogicaAplicacion.InterfacesCasosUso;
 using LogicaDatos.Repositorios;
+using LogicaNegocio.Dominio;
 using LogicaNegocio.InterfacesRepositorios;
 using Microsoft.EntityFrameworkCore;
 
-namespace WebAPI {
+namespace WebAPI
+{
     public class Program {
         public static void Main(string[] args) {
             var builder = WebApplication.CreateBuilder(args);
@@ -16,6 +18,12 @@ namespace WebAPI {
 
             builder.Services.AddScoped<IRepositorioArticulos, RepositorioArticulos>();
             builder.Services.AddScoped<IRepositorioPedidos, RepositorioPedidos>();
+
+            builder.Services.AddScoped<ICUAlta<TipoMovimientoDTO>, CUAltaTipoMovimiento>();
+            builder.Services.AddScoped<ICUBaja<TipoMovimientoDTO>, CUBajaTipoMovimiento>();
+            builder.Services.AddScoped<ICUListado<TipoMovimientoDTO>, CUListadoTiposMovimientos>();
+            builder.Services.AddScoped<ICUModificar<TipoMovimientoDTO>, CUModificarTipoMovimiento>();
+            builder.Services.AddScoped<ICUBuscarPorId<TipoMovimientoDTO>, CUBuscarPorIdTipoMovimiento>();
 
             string conStr = builder.Configuration.GetConnectionString("Caro-Zenbook");
             builder.Services.AddDbContext<ObligatorioContext>(options => options.UseSqlServer(conStr));

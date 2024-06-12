@@ -19,9 +19,10 @@ namespace LogicaDatos.Repositorios {
         public DbSet<PedidoComun> PedidoComun { get; set; }
         public DbSet<Linea> Lineas { get; set; }
         public DbSet<Parametro> Parametros { get; set; }
+        public DbSet<TipoMovimiento> TiposMovimientos { get; set; }
 
         public ObligatorioContext(DbContextOptions options) : base(options) {
-            
+
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder) {
@@ -32,62 +33,63 @@ namespace LogicaDatos.Repositorios {
             modelBuilder.Entity<Pedido>().ToTable("Pedidos");
             modelBuilder.Entity<Linea>().ToTable("Lineas");
             modelBuilder.Entity<Parametro>().ToTable("Parametros");
+            modelBuilder.Entity<TipoMovimiento>().ToTable("TiposDeMovimientos");
 
             //--------------------------------------------------------------------------
             //---------------------------- TEST DATA -----------------------------------
             //--------------------------------------------------------------------------
             modelBuilder.Entity<Cliente>(builder => {
-            builder.OwnsOne(d => d.Direccion, direccion => {
-                direccion.OwnsOne(ca => ca.Calle, calle => {
-                    calle.HasData(
-                            new { Valor = "Ciudadela", DireccionId = 1 },
-                            new { Valor = "Reconquista", DireccionId = 2 },
-                            new { Valor = "Durazno", DireccionId = 3 },
-                            new { Valor = "San Jose", DireccionId = 4 },
-                            new { Valor = "Maldonado", DireccionId = 5 },
-                            new { Valor = "Canelones", DireccionId = 6 }
-                        );
-                });
-                direccion.OwnsOne(n => n.NumeroPuerta, numero => {
-                    numero.HasData(
-                            new { Valor = "1180", DireccionId = 1 },
-                            new { Valor = "600", DireccionId = 2 },
-                            new { Valor = "902", DireccionId = 3 },
-                            new { Valor = "1060", DireccionId = 4 },
-                            new { Valor = "2010", DireccionId = 5 },
-                            new { Valor = "1110", DireccionId = 6 }
-                        );
-                });
-                direccion.OwnsOne(ci => ci.Ciudad, ciudad => {
-                    ciudad.HasData(
-                            new { Valor = "Montevideo", DireccionId = 1 },
-                            new { Valor = "Montevideo", DireccionId = 2 },
-                            new { Valor = "Montevideo", DireccionId = 3 },
-                            new { Valor = "Montevideo", DireccionId = 4 },
-                            new { Valor = "Montevideo", DireccionId = 5 },
-                            new { Valor = "Montevideo", DireccionId = 6 }
-                        );
-                });
-                direccion.HasData(
-                    new { ClienteId = 1 },
-                    new { ClienteId = 2 },
-                    new { ClienteId = 3 },
-                    new { ClienteId = 4 },
-                    new { ClienteId = 5 },
-                    new { ClienteId = 6 }
-                );
+                builder.OwnsOne(d => d.Direccion, direccion => {
+                    direccion.OwnsOne(ca => ca.Calle, calle => {
+                        calle.HasData(
+                                new { Valor = "Ciudadela", DireccionId = 1 },
+                                new { Valor = "Reconquista", DireccionId = 2 },
+                                new { Valor = "Durazno", DireccionId = 3 },
+                                new { Valor = "San Jose", DireccionId = 4 },
+                                new { Valor = "Maldonado", DireccionId = 5 },
+                                new { Valor = "Canelones", DireccionId = 6 }
+                            );
+                    });
+                    direccion.OwnsOne(n => n.NumeroPuerta, numero => {
+                        numero.HasData(
+                                new { Valor = "1180", DireccionId = 1 },
+                                new { Valor = "600", DireccionId = 2 },
+                                new { Valor = "902", DireccionId = 3 },
+                                new { Valor = "1060", DireccionId = 4 },
+                                new { Valor = "2010", DireccionId = 5 },
+                                new { Valor = "1110", DireccionId = 6 }
+                            );
+                    });
+                    direccion.OwnsOne(ci => ci.Ciudad, ciudad => {
+                        ciudad.HasData(
+                                new { Valor = "Montevideo", DireccionId = 1 },
+                                new { Valor = "Montevideo", DireccionId = 2 },
+                                new { Valor = "Montevideo", DireccionId = 3 },
+                                new { Valor = "Montevideo", DireccionId = 4 },
+                                new { Valor = "Montevideo", DireccionId = 5 },
+                                new { Valor = "Montevideo", DireccionId = 6 }
+                            );
+                    });
+                    direccion.HasData(
+                        new { ClienteId = 1 },
+                        new { ClienteId = 2 },
+                        new { ClienteId = 3 },
+                        new { ClienteId = 4 },
+                        new { ClienteId = 5 },
+                        new { ClienteId = 6 }
+                    );
 
+                });
+                builder.HasData(
+                        new Cliente { Id = 1, RazonSocial = "Fleetium Macs", Rut = "123456789012", DistanciaHastaDeposito = 98 },
+                        new Cliente { Id = 2, RazonSocial = "Pink Folks", Rut = "987654321098", DistanciaHastaDeposito = 101 },
+                        new Cliente { Id = 3, RazonSocial = "Thurston & Kim Co.", Rut = "111222333444", DistanciaHastaDeposito = 96 },
+                        new Cliente { Id = 4, RazonSocial = "Nueva Helvecia Dolls", Rut = "111222333555", DistanciaHastaDeposito = 94 },
+                        new Cliente { Id = 5, RazonSocial = "Fenix", Rut = "111222333666", DistanciaHastaDeposito = 82 },
+                        new Cliente { Id = 6, RazonSocial = "AB/CD", Rut = "111222333777", DistanciaHastaDeposito = 91 }
+                    );
             });
-            builder.HasData(
-                    new Cliente { Id = 1, RazonSocial = "Fleetium Macs", Rut = "123456789012", DistanciaHastaDeposito = 98 },
-                    new Cliente { Id = 2, RazonSocial = "Pink Folks", Rut = "987654321098", DistanciaHastaDeposito = 101 },
-                    new Cliente { Id = 3, RazonSocial = "Thurston & Kim Co.", Rut = "111222333444", DistanciaHastaDeposito = 96 },
-                    new Cliente { Id = 4, RazonSocial = "Nueva Helvecia Dolls", Rut = "111222333555", DistanciaHastaDeposito = 94 },
-                    new Cliente { Id = 5, RazonSocial = "Fenix", Rut = "111222333666", DistanciaHastaDeposito = 82 },
-                    new Cliente { Id = 6, RazonSocial = "AB/CD", Rut = "111222333777", DistanciaHastaDeposito = 91 }
-                );
-            });
-            
+
             modelBuilder.Entity<Usuario>().HasData(
                 new Usuario { Id = 1, Email = "admin@admin.com", Nombre = "Sys", Apellido = "Admin", Contraseña = "Passw0rd!", Tipo = TipoUsuario.Administrador },
                 new Usuario { Id = 2, Email = "rplanta@lz.com", Nombre = "Roberto", Apellido = "Planta", Contraseña = "Passw0rd!", Tipo = TipoUsuario.Estandar },
@@ -120,7 +122,7 @@ namespace LogicaDatos.Repositorios {
             //optionsBuilder.UseSqlServer(
             //    "Data Source=localhost\\SQLEXPRESS; Initial Catalog=ObligatorioProg3; Integrated Security=SSPI;TrustServerCertificate=True"
             //);
-        } 
+        }
     }
     // Owned types https://learn.microsoft.com/en-us/ef/core/modeling/owned-entities#configuring-owned-types
     // Data Seeding https://learn.microsoft.com/en-us/ef/core/modeling/data-seeding
