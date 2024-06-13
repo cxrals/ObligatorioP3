@@ -20,6 +20,8 @@ namespace LogicaDatos.Repositorios {
         public DbSet<Linea> Lineas { get; set; }
         public DbSet<Parametro> Parametros { get; set; }
         public DbSet<TipoMovimiento> TiposMovimientos { get; set; }
+        public DbSet<MovimientoStock> MovimientosStock { get; set; }
+        
 
         public ObligatorioContext(DbContextOptions options) : base(options) {
 
@@ -34,6 +36,7 @@ namespace LogicaDatos.Repositorios {
             modelBuilder.Entity<Linea>().ToTable("Lineas");
             modelBuilder.Entity<Parametro>().ToTable("Parametros");
             modelBuilder.Entity<TipoMovimiento>().ToTable("TiposDeMovimientos");
+            modelBuilder.Entity<MovimientoStock>().ToTable("MovimientosDeStock");
 
             //--------------------------------------------------------------------------
             //---------------------------- TEST DATA -----------------------------------

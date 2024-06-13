@@ -25,6 +25,10 @@ namespace WebAPI
             builder.Services.AddScoped<ICUModificar<TipoMovimientoDTO>, CUModificarTipoMovimiento>();
             builder.Services.AddScoped<ICUBuscarPorId<TipoMovimientoDTO>, CUBuscarPorIdTipoMovimiento>();
 
+            builder.Services.AddScoped<ICUAlta<MovimientoStockDTO>, CUAltaMovimientoStock>();
+            builder.Services.AddScoped<ICUListado<MovimientoStockDTO>, CUListadoMovimientosStock>();
+            builder.Services.AddScoped<ICUBuscarPorId<MovimientoStockDTO>, CUBuscarPorIdMovimientoStock>();
+
             string conStr = builder.Configuration.GetConnectionString("Caro-Zenbook");
             builder.Services.AddDbContext<ObligatorioContext>(options => options.UseSqlServer(conStr));
 
