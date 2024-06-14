@@ -39,7 +39,7 @@ namespace WebAPI.Controllers {
         }
 
         // GET api/<TiposMovimientosController>/5
-        [HttpGet("{id}", Name = "BuscarPorId")]
+        [HttpGet("{id}", Name = "BuscarPorIdTM")]
         public IActionResult Get(int id) {
             if (id <= 0) return BadRequest("El id deber ser positivo");
             TipoMovimientoDTO tm = CUBuscarPorIdTM.BuscarPorId(id);
@@ -58,7 +58,7 @@ namespace WebAPI.Controllers {
 
             try {
                 CUAlta.Alta(tmDTO);
-                return CreatedAtRoute("BuscarPorId", new { id = tmDTO.Id }, tmDTO);
+                return CreatedAtRoute("BuscarPorIdTM", new { id = tmDTO.Id }, tmDTO);
             } catch (DuplicadoException e) {
                 return BadRequest(e.Message);
             } catch (Exception e) {

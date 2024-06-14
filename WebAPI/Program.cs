@@ -16,9 +16,6 @@ namespace WebAPI
             builder.Services.AddScoped<ICUOrdenarArticulosAsc, CUOrdenarArticulosAsc>();
             builder.Services.AddScoped<ICUOrdenarPedidosAnuladosDesc, CUOrdenarPedidosAnuladosDesc>();
 
-            builder.Services.AddScoped<IRepositorioArticulos, RepositorioArticulos>();
-            builder.Services.AddScoped<IRepositorioPedidos, RepositorioPedidos>();
-
             builder.Services.AddScoped<ICUAlta<TipoMovimientoDTO>, CUAltaTipoMovimiento>();
             builder.Services.AddScoped<ICUBaja<TipoMovimientoDTO>, CUBajaTipoMovimiento>();
             builder.Services.AddScoped<ICUListado<TipoMovimientoDTO>, CUListadoTiposMovimientos>();
@@ -28,6 +25,12 @@ namespace WebAPI
             builder.Services.AddScoped<ICUAlta<MovimientoStockDTO>, CUAltaMovimientoStock>();
             builder.Services.AddScoped<ICUListado<MovimientoStockDTO>, CUListadoMovimientosStock>();
             builder.Services.AddScoped<ICUBuscarPorId<MovimientoStockDTO>, CUBuscarPorIdMovimientoStock>();
+            
+            builder.Services.AddScoped<IRepositorioArticulos, RepositorioArticulos>();
+            builder.Services.AddScoped<IRepositorioPedidos, RepositorioPedidos>();
+            builder.Services.AddScoped<IRepositorioUsuarios, RepositorioUsuarios>();
+            builder.Services.AddScoped<IRepositorioTiposMovimientos, RepositorioTiposMovimientos>();
+            builder.Services.AddScoped<IRepositorioMovimientosStock, RepositorioMovimientosStock>();
 
             string conStr = builder.Configuration.GetConnectionString("Caro-Zenbook");
             builder.Services.AddDbContext<ObligatorioContext>(options => options.UseSqlServer(conStr));

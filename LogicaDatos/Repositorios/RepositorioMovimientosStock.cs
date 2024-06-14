@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace LogicaDatos.Repositorios {
-    internal class RepositorioMovimientosStock : IRepositorioMovimientosStock {
+    public class RepositorioMovimientosStock : IRepositorioMovimientosStock {
         public ObligatorioContext Contexto { get; private set; }
 
         public RepositorioMovimientosStock(ObligatorioContext ctx) {

@@ -11,8 +11,11 @@ namespace LogicaNegocio.Dominio {
         private DateTime _fecha = DateTime.Now;
         public int Id { get; set; }
         public DateTime Fecha { get { return _fecha; } set { _fecha = value; } }
+        public int ArticuloId { get; set; }
         public Articulo Articulo { get; set; }
+        public int UsuarioId { get; set; }
         public Usuario Usuario { get; set; }
+        public int TipoMovimientoId { get; set; }
         public TipoMovimiento TipoMovimiento { get; set; }
         public int Cantidad { get; set; }
 

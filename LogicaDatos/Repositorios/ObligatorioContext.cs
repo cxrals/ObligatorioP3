@@ -96,7 +96,7 @@ namespace LogicaDatos.Repositorios {
             modelBuilder.Entity<Usuario>().HasData(
                 new Usuario { Id = 1, Email = "admin@admin.com", Nombre = "Sys", Apellido = "Admin", Contraseña = "Passw0rd!", Tipo = TipoUsuario.Administrador },
                 new Usuario { Id = 2, Email = "rplanta@lz.com", Nombre = "Roberto", Apellido = "Planta", Contraseña = "Passw0rd!", Tipo = TipoUsuario.Estandar },
-                new Usuario { Id = 2, Email = "jblanco@tws.com", Nombre = "Jacobo", Apellido = "Blanco", Contraseña = "Passw0rd!", Tipo = TipoUsuario.Encargado }
+                new Usuario { Id = 3, Email = "jblanco@tws.com", Nombre = "Jacobo", Apellido = "Blanco", Contraseña = "Passw0rd!", Tipo = TipoUsuario.Encargado }
             );
 
             modelBuilder.Entity<Articulo>().HasData(
@@ -116,14 +116,25 @@ namespace LogicaDatos.Repositorios {
                 new Parametro { Id = 2, Nombre = "RecargoComun_DistanciaMayor100", Valor = 0.05M },
                 new Parametro { Id = 3, Nombre = "RecargoComun_DistanciaMenor100", Valor = 0 },
                 new Parametro { Id = 4, Nombre = "RecargoExpress_Plazo1Dia", Valor = 0.15M },
-                new Parametro { Id = 5, Nombre = "RecargoExpress_PlazoMayor1Dia", Valor = 0.10M }
+                new Parametro { Id = 5, Nombre = "RecargoExpress_PlazoMayor1Dia", Valor = 0.10M },
+                new Parametro { Id = 6, Nombre = "TopeDeMovimientos", Valor = 20 }
+            );
+
+            modelBuilder.Entity<TipoMovimiento>().HasData(
+                new TipoMovimiento { Id = 1, Nombre = "Venta" },
+                new TipoMovimiento { Id = 2, Nombre = "Compra" },
+                new TipoMovimiento { Id = 3, Nombre = "Devolucion" }
+            );
+
+            modelBuilder.Entity<MovimientoStock>().HasData(
+                new MovimientoStock { Id = 1, Cantidad = 10, ArticuloId = 1, TipoMovimientoId=1, UsuarioId=3 }
             );
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) {
             base.OnConfiguring(optionsBuilder);
             //optionsBuilder.UseSqlServer(
-            //    "Data Source=localhost\\SQLEXPRESS; Initial Catalog=ObligatorioProg3; Integrated Security=SSPI;TrustServerCertificate=True"
+            //    "Data Source=localhost\\SQLEXPRESS; Initial Catalog=ObligatorioP3; Integrated Security=SSPI;TrustServerCertificate=True"
             //);
         }
     }

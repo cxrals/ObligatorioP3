@@ -63,6 +63,19 @@ namespace LogicaDatos.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "TiposDeMovimientos",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Nombre = table.Column<string>(type: "nvarchar(450)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_TiposDeMovimientos", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Usuarios",
                 columns: table => new
                 {
@@ -104,6 +117,41 @@ namespace LogicaDatos.Migrations
                         name: "FK_Pedidos_Clientes_ClienteId",
                         column: x => x.ClienteId,
                         principalTable: "Clientes",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "MovimientosDeStock",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Fecha = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    ArticuloId = table.Column<int>(type: "int", nullable: false),
+                    UsuarioId = table.Column<int>(type: "int", nullable: false),
+                    TipoMovimientoId = table.Column<int>(type: "int", nullable: false),
+                    Cantidad = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_MovimientosDeStock", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_MovimientosDeStock_Articulos_ArticuloId",
+                        column: x => x.ArticuloId,
+                        principalTable: "Articulos",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_MovimientosDeStock_TiposDeMovimientos_TipoMovimientoId",
+                        column: x => x.TipoMovimientoId,
+                        principalTable: "TiposDeMovimientos",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_MovimientosDeStock_Usuarios_UsuarioId",
+                        column: x => x.UsuarioId,
+                        principalTable: "Usuarios",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -166,7 +214,25 @@ namespace LogicaDatos.Migrations
             migrationBuilder.InsertData(
                 table: "Parametros",
                 columns: new[] { "Id", "Nombre", "Valor" },
-                values: new object[] { 1, "IVA", 0.18m });
+                values: new object[,]
+                {
+                    { 1, "IVA", 0.18m },
+                    { 2, "RecargoComun_DistanciaMayor100", 0.05m },
+                    { 3, "RecargoComun_DistanciaMenor100", 0m },
+                    { 4, "RecargoExpress_Plazo1Dia", 0.15m },
+                    { 5, "RecargoExpress_PlazoMayor1Dia", 0.10m },
+                    { 6, "TopeDeMovimientos", 20m }
+                });
+
+            migrationBuilder.InsertData(
+                table: "TiposDeMovimientos",
+                columns: new[] { "Id", "Nombre" },
+                values: new object[,]
+                {
+                    { 1, "Venta" },
+                    { 2, "Compra" },
+                    { 3, "Devolucion" }
+                });
 
             migrationBuilder.InsertData(
                 table: "Usuarios",
@@ -174,8 +240,14 @@ namespace LogicaDatos.Migrations
                 values: new object[,]
                 {
                     { 1, "Admin", null, "Passw0rd!", "admin@admin.com", "Sys", "Administrador" },
-                    { 2, "Planta", null, "Passw0rd!", "rplanta@lz.com", "Roberto", "Estandar" }
+                    { 2, "Planta", null, "Passw0rd!", "rplanta@lz.com", "Roberto", "Estandar" },
+                    { 3, "Blanco", null, "Passw0rd!", "jblanco@tws.com", "Jacobo", "Encargado" }
                 });
+
+            migrationBuilder.InsertData(
+                table: "MovimientosDeStock",
+                columns: new[] { "Id", "ArticuloId", "Cantidad", "Fecha", "TipoMovimientoId", "UsuarioId" },
+                values: new object[] { 1, 1, 10, new DateTime(2024, 6, 14, 10, 40, 8, 913, DateTimeKind.Local).AddTicks(1719), 1, 3 });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Articulos_CodigoProveedor",
@@ -207,9 +279,30 @@ namespace LogicaDatos.Migrations
                 column: "PedidoId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_MovimientosDeStock_ArticuloId",
+                table: "MovimientosDeStock",
+                column: "ArticuloId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_MovimientosDeStock_TipoMovimientoId",
+                table: "MovimientosDeStock",
+                column: "TipoMovimientoId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_MovimientosDeStock_UsuarioId",
+                table: "MovimientosDeStock",
+                column: "UsuarioId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Pedidos_ClienteId",
                 table: "Pedidos",
                 column: "ClienteId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_TiposDeMovimientos_Nombre",
+                table: "TiposDeMovimientos",
+                column: "Nombre",
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_Usuarios_Email",
@@ -225,16 +318,22 @@ namespace LogicaDatos.Migrations
                 name: "Lineas");
 
             migrationBuilder.DropTable(
+                name: "MovimientosDeStock");
+
+            migrationBuilder.DropTable(
                 name: "Parametros");
 
             migrationBuilder.DropTable(
-                name: "Usuarios");
+                name: "Pedidos");
 
             migrationBuilder.DropTable(
                 name: "Articulos");
 
             migrationBuilder.DropTable(
-                name: "Pedidos");
+                name: "TiposDeMovimientos");
+
+            migrationBuilder.DropTable(
+                name: "Usuarios");
 
             migrationBuilder.DropTable(
                 name: "Clientes");

@@ -45,7 +45,7 @@ namespace LogicaDatos.Repositorios {
         }
 
         public Usuario BuscarPorEmail(string email) {
-            return Contexto.Usuarios.Where(u => u.Email.ToLower() == email.ToLower()).First();
+            return Contexto.Usuarios.Where(u => u.Email.ToLower() == email.ToLower()).SingleOrDefault();
         }
 
         public List<Usuario> GetAll() {
