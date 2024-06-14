@@ -117,13 +117,14 @@ namespace LogicaDatos.Repositorios {
                 new Parametro { Id = 3, Nombre = "RecargoComun_DistanciaMenor100", Valor = 0 },
                 new Parametro { Id = 4, Nombre = "RecargoExpress_Plazo1Dia", Valor = 0.15M },
                 new Parametro { Id = 5, Nombre = "RecargoExpress_PlazoMayor1Dia", Valor = 0.10M },
-                new Parametro { Id = 6, Nombre = "TopeDeMovimientos", Valor = 20 }
+                new Parametro { Id = 6, Nombre = "TopeDeMovimientos", Valor = 20 },
+                new Parametro { Id = 7, Nombre = "LimitePorPagina", Valor = 5 }
             );
 
             modelBuilder.Entity<TipoMovimiento>().HasData(
-                new TipoMovimiento { Id = 1, Nombre = "Venta" },
-                new TipoMovimiento { Id = 2, Nombre = "Compra" },
-                new TipoMovimiento { Id = 3, Nombre = "Devolucion" }
+                new TipoMovimiento { Id = 1, Nombre = "Venta", TipoAccion = Tipo.Reduccion },
+                new TipoMovimiento { Id = 2, Nombre = "Compra", TipoAccion = Tipo.Aumento },
+                new TipoMovimiento { Id = 3, Nombre = "Devolucion", TipoAccion = Tipo.Aumento }
             );
 
             modelBuilder.Entity<MovimientoStock>().HasData(

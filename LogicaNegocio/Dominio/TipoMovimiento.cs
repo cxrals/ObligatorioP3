@@ -11,15 +11,15 @@ namespace LogicaNegocio.Dominio {
     public class TipoMovimiento : IValidar {
         public int Id { get; set; }
         public string Nombre { get; set; }
-        //public Tipo TipoAccion { get; set; }
+        public Tipo TipoAccion { get; set; }
 
         public void EsValido() {
             throw new NotImplementedException();
         }
     }
 
-    //public enum Tipo {
-    //    Reduccion,
-    //    Aumento
-    //}
+    public enum Tipo {
+        Reduccion,
+        Aumento
+    }
 }

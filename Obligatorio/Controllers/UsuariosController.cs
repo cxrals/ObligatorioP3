@@ -6,6 +6,8 @@ using Microsoft.AspNetCore.Http;
 using Obligatorio.Models;
 using LogicaNegocio.Excepciones;
 using Obligatorio.Filters;
+using DataTransferObjects;
+using Newtonsoft.Json;
 
 namespace Obligatorio.Controllers {
     public class UsuariosController : Controller {
@@ -44,10 +46,12 @@ namespace Obligatorio.Controllers {
                 return View();
             }
 
-            if (CUAutenticarUsuario.Autenticar(model.Email, model.Password, out Usuario u)) {
-                HttpContext.Session.SetString("EMAIL", model.Email);
-                HttpContext.Session.SetString("TIPOUSUARIO", u.Tipo.ToString());
-                return RedirectToAction("Index","Home");
+            UsuarioDTO usuarioDTO = CUAutenticarUsuario.Autenticar(model.Email, model.Password);
+            
+            if (usuarioDTO != null) { 
+                HttpContext.Session.SetString("Email", model.Email);
+                HttpContext.Session.SetString("TIPOUSUARIO", usuarioDTO.Tipo);
+                return RedirectToAction("Index", "Home");
             }
 
             HttpContext.Session.Clear();

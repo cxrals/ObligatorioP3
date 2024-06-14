@@ -1,4 +1,5 @@
-﻿using LogicaNegocio.Dominio;
+﻿using DataTransferObjects;
+using LogicaNegocio.Dominio;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,6 +8,6 @@ using System.Threading.Tasks;
 
 namespace LogicaAplicacion.InterfacesCasosUso {
     public interface ICUAutenticarUsuario {
-        bool Autenticar(string email, string contraseña, out Usuario u);
+        UsuarioDTO Autenticar(string email, string contraseña);
     }
 }
